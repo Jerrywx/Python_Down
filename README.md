@@ -30,7 +30,7 @@ Python_Down
 3、逻辑运算符
     or、and、not
 
-###分支和循环
+###007分支和循环
 1、else 悬挂
 2、while 循环
 3、for 循环
@@ -46,7 +46,7 @@ Python_Down
     - step=1 表示第三个参数的默认值是1
     - range 可以生成从start参数值开始到stop惨呼是值结束的数字序列
         
-###数组
+###008数组
 1、创建列表
     a. 普通类型列表
     ```
@@ -94,7 +94,9 @@ Python_Down
     reverse()    翻转
     sort()       排序
     
-
+    
+###009元组
+    
 
 
 
