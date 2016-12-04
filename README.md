@@ -98,5 +98,99 @@ Python_Down
 ###009元组
     
 
+###014字符串
 
+
+###017函数
+1、定义函数 使用 def 关键字
+```
+def MyFirstFunction() :
+    print("MyFirstFunction!")
+    print("这是我创建的第一个函数!")
+```
+2、函数调用
+```
+MyFirstFunction()
+```
+3、定义带参数函数
+```
+# 定义一个参数函数
+def hello(name):
+    print("Hello " + name + "!")
+    
+# 调用
+hello("Test")
+```
+
+```
+# 定义多个参数函数
+def add(num1, num2):
+    print(num1 + num2)
+    
+# 调用
+add(2, 3)
+```
+
+4、定义返回值函数
+```
+# 定义带返回值函数
+def add(num1, num2):
+    return (num1 + num2)
+    
+# 调用
+print(add(2, 3))
+```
+
+5、函数文档
+```
+# 定义一个带注释文档的函数
+def testFunc():
+    '这是函数的注释'
+    print("This is testFunc")
+
+# 获取注释
+testFunc.__doc__
+# 注: help 可获取函数帮助文档
+```
+
+6、关键字参数
+```
+# 定义一个函数
+def func(param1, param2):
+    print(param1 + " " + param2)
+# 调用函数使用关键字参数
+func(param2 = "two", param1 = "one")
+
+```
+
+7、默认参数
+```
+# 定义一个默认参数函数
+def add(num1=4, num2=6):
+    print(num1 + num2)
+
+# 调用函数
+add(3)
+# 结果9
+```
+
+8、收集参数 (多个参数 存放在数组中)
+```
+# 定义收集参数
+def testFunc(*param):
+    print("参数个数:" + len(param))
+    print("第一个参数" + param[0])
+    
+# 调用函数
+testFunc(1,2,3,4,5)
+# 注: 如果要包含其他参数使用 默认参数
+```
+9、函数变量作用域
+    a. 局部变量
+    b. 全局变量 
+    global 关键字  修改全局变量时使用
+    
+
+10、嵌套函数 (在函数中创建另一个函数)
+    
 
