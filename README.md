@@ -192,5 +192,41 @@ testFunc(1,2,3,4,5)
     
 
 10、嵌套函数 (在函数中创建另一个函数)
+```
+# 定义嵌套函数
+def func1():
+    print("func1 Runing")
+    def func2():
+        print("func2 Runing")
+    func2()
+# 调用
+func1()
+```
+
+11、闭包
+> lisp语言
+
+
+12、匿名函数 
+```
+# 匿名函数 lambda
+func = lambda x: x * x
+
+# 调用
+func(5)
+```
+
+13、BIF filter()
+>help(filter)
+>filter(function or None, iterable) --> filter object
+14、BIF map()
+>help(map)
+>map(func, *iterables) --> map object
+
+###022递归
+
+###025字典
+
+
     
 
