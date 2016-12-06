@@ -236,3 +236,93 @@ dict["bb"]
 ###028文件
 
 
+###036面向对象编程
+1、定义一个类
+```
+# 定义学生类
+class Student(object):
+    def __init__(self, name, score):
+        self.name = name
+        self.score = score
+        
+    def print_score(self):
+        print("%s : %s", (self.name, self.score))
+
+# 使用学生类
+s = Student("wxiao", "100")
+s.print_score()
+```
+2、类和实例
+######a. 创建类和实例
+```
+>>> class Student(object):
+...     pass
+... 
+>>> s = Student()
+>>> s
+<__main__.Student object at 0x10c972a10>
+>>> Student
+<class '__main__.Student'>
+>>> 
+```
+
+######b.给实例绑定属性
+```
+>>> s.name = "pName"
+>>> s.name
+'pName'
+>>> s.age = 24
+>>> s.age
+24
+>>> 
+```
+######c.初始化方法 __init__
+>__init__方法，在创建实例的时候调用
+>注意到__init__方法的第一个参数永远是self，表示创建的实例本身
+
+
+3、访问限制
+>在Python中，实例的变量名如果以__开头，就变成了一个私有变量（private），只有内部可以访问，外部不能访问
+
+4、继承和多态
+
+
+5、获取对象信息
+######a. 使用 type()
+    获取对象类型
+    type(123) == type(456)
+    
+
+#######b. 使用 isinstance()
+    判断某个实例是否属于某类型
+    isinstance(dog, Dog)
+    
+#######c. 使用 dir() 
+获得一个对象的所有属性和方法
+dir(list)
+
+######d. 获取实例信息
+hasattr(obj, "x")       # 是否包含 x 属性
+setattr(obj, 'y', 19)   # 设置一个属性'y' 
+getattr(obj, 'y')       # 获取属性'y'
+getattr(obj, 'z', 404)  # 获取属性'z'，如果不存在，返回默认值404
+
+6、实例属性和类属性
+
+```
+# 实例属性
+class Student(object):
+    def __init__(self, name):
+        self.name = name
+
+s = Student('Bob')
+s.score = 90
+
+# 类属性
+class Student(object):
+    name = 'Student'
+```
+
+>当我们定义了一个类属性后，这个属性虽然归类所有，但类的所有实例都可以访问到。
+>在编写程序的时候，千万不要把实例属性和类属性使用相同的名字，因为相同名称的实例属性将屏蔽掉类属性，但是当你删除实例属性后，再使用相同的名称，访问到的将是类属性。
+
