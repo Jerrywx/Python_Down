@@ -28,6 +28,25 @@
 
 六、单粒模式
 
+--------------------------------- 单粒模式
+class Foo:
+
+    __instance = None
+
+    @classmethod
+    def get_instance(cls):
+        if cls.__instance
+
+        
+            return cls.__instance
+
+        else:
+            cls.__instance = Foo()
+            return cls.__instance
+
+# 通过使用 f = Foo.getinstance() 获取对象
+---------------------------------
+
 '''
 
 
@@ -87,5 +106,26 @@ p = Person("wxiao", 26)
 # p[3]
 # p[1:2]
 
-for item in p:
-    print(item)
+# for item in p:
+#     print(item)
+
+
+
+class Foo:
+
+    __instance = None
+
+    @classmethod
+    def get_instance(cls):
+        if cls.__instance:
+            return cls.__instance
+
+        else:
+            cls.__instance = Foo()
+            return cls.__instance
+
+f = Foo.get_instance()
+print(f)
+f1 = Foo.get_instance()
+print(f)
+
