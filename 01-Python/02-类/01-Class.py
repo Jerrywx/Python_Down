@@ -6,6 +6,8 @@
     2.私有属性
         使用"__"双下换线收拾的变量就是 私有属性
 
+
+
 二、特殊成员
 
     1. __init__     : 初始化时调用        ClassName()
@@ -20,15 +22,182 @@
     10. __delitem__ : del obj[0]        执行指定的 __delitem__ 方法
     11. __iter__    : 在 for in 中执行
 
+
+
 三、metaclass 元类
+
+
 
 四、异常处理
 
+# ------------- 异常处理简单流程 1
+try:
+    # 代码逻辑
+    pass
+except Exception as e:
+    # 错误处理
+    pass
+
+# ------------- 异常处理完整流程 2
+try:
+    # 异常代码
+    pass
+
+except IndexError as e:
+    print("IndexError")
+
+except ValueError as e:
+    print("ValueError")
+
+except Exception as e:
+    print("ExceptionError")
+
+else:
+    # 如果异常代码没有出现错误
+    print("else")
+
+finally:
+    # 最终都会执行
+    print("finally")
+
+# ------------- 主动触发异常 3
+# 主动触发异常
+raise Exception('出现异常')
+
+# ------------- 自定义异常 4
+# 自定义异常类
+class MyError(Exception):
+
+    def __init__(self, msg):
+        self.message = msg
+
+    def __str__(self):
+        return self.message
+
+# 抛出自定义异常
+try:
+    raise MyError("我错了...")
+except MyError as e:
+    print(e)
+
+# ------------- 断言 5
+# 条件不成立时报错
+assert 1 == 2
+
+
 五、反射
+# 通过字符串 操作对象中的成员
+
+# 通过字符串 获取对象中的成员属性
+1. getattr(p, "age")
+
+# 通过字符串 设置对象中的成员属性
+2. setattr(p, "name", "wx")
+
+# 通过字符串 删除对象中的成员属性
+3. delattr(p, "name")
 
 六、单粒模式
 
+--------------------------------- 单粒模式
+class Foo:
+
+    __instance = None
+
+    @classmethod
+    def get_instance(cls):
+        if cls.__instance
+
+        
+            return cls.__instance
+
+        else:
+            cls.__instance = Foo()
+            return cls.__instance
+
+# 通过使用 f = Foo.getinstance() 获取对象
+---------------------------------
+
 '''
+
+# # 异常完整处理 2
+# try:
+#     # 异常代码
+#     pass
+#
+# except IndexError as e:
+#     print("IndexError")
+#
+# except ValueError as e:
+#     print("ValueError")
+#
+# except Exception as e:
+#     print("ExceptionError")
+#
+# else:
+#     # 如果异常代码没有出现错误
+#     print("else")
+#
+# finally:
+#     # 最终都会执行
+#     print("finally")
+#
+#
+# numb = input("请输入一个数字:")
+#
+# try:
+#     n = int(numb)
+#
+# except Exception as e:
+#     print(e)
+#     n = 1
+#
+# print(n)
+
+class Person:
+
+    __haha
+
+    def __init__(self, name, age):
+        self.name = name
+        self.age = age
+
+    def log(self):
+        print("name %s age:%d" % (self.name, self.age))
+
+p = Person("wxioa", 26)
+
+print(getattr(p, "name"))
+setattr(p, "age", 22)
+print(getattr(p, "age"))
+
+
+print(getattr(p, "log"))
+print(getattr(Person, "log"))
+
+
+delattr(p, "name")
+
+
+
+
+
+
+
+# ---- 自定义异常
+class MyError(Exception):
+
+    def __init__(self, msg):
+        self.message = msg
+
+    def __str__(self):
+        return self.message
+
+try:
+    raise MyError("我错了...")
+except MyError as e:
+    print(e)
+
 
 
 class Person:
@@ -87,5 +256,26 @@ p = Person("wxiao", 26)
 # p[3]
 # p[1:2]
 
-for item in p:
-    print(item)
+# for item in p:
+#     print(item)
+
+
+
+class Foo:
+
+    __instance = None
+
+    @classmethod
+    def get_instance(cls):
+        if cls.__instance:
+            return cls.__instance
+
+        else:
+            cls.__instance = Foo()
+            return cls.__instance
+
+# f = Foo.get_instance()
+# print(f)
+# f1 = Foo.get_instance()
+# print(f)
+
