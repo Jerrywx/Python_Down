@@ -68,3 +68,15 @@ print(fileName)
 
 # 19、上一级路径
 print(os.path.dirname(path))
+
+# 20、路径拼接
+# print(os.path.join('path1', 'path2'))
+
+# 21、文件最后存储时间
+print(os.path.getatime(path))
+
+# 22、文件最后修改时间
+print(os.path.getmtime(path))
+
+# 23、文件创建时间
+print(os.path.getctime(path))
