@@ -16,6 +16,20 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
+from blog import views
+
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+
+    # url(r'^admin/', admin.site.urls),
+
+    url(r'^admin/', views.hello),
+    url(r'^hello', views.hello),
+    url(r'^python', views.helloPython),
+    url(r'^test', views.test),
+    # url(r'^test2', views.test2, )
+    # url() 可以接收四个参数，分别是两个必选参数：regex、view 和两个可选参数：kwargs、name，接下来详细介绍这四个参数。
+    # regex:    正则表达式，与之匹配的 URL 会执行对应的第二个参数 view。
+    # view:     用于执行与正则表达式匹配的 URL 请求。
+    # kwargs:   视图使用的字典类型的参数。
+    # name:     用来反向获取 URL。
 ]
