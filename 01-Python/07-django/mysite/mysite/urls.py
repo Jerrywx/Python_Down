@@ -20,9 +20,9 @@ from blog import views, testdb, search
 
 urlpatterns = [
 
-    # url(r'^admin/', admin.site.urls),
+    url(r'^admin/', admin.site.urls),
 
-    url(r'^admin/', views.hello),
+    # url(r'^admin/', views.hello),
     url(r'^hello', views.hello),
     url(r'^python', views.helloPython),
     # url(r'^test', views.test),
