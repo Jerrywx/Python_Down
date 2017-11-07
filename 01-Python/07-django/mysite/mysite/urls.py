@@ -17,6 +17,7 @@ from django.conf.urls import url
 from django.contrib import admin
 
 from blog import views
+from blog import testdb
 
 urlpatterns = [
 
@@ -25,7 +26,11 @@ urlpatterns = [
     url(r'^admin/', views.hello),
     url(r'^hello', views.hello),
     url(r'^python', views.helloPython),
-    url(r'^test', views.test),
+    # url(r'^test', views.test),
+    url(r'^testdb', testdb.testdb),
+    url(r'^readdb', testdb.readdb),
+    url(r'^updatedb', testdb.updatedb),
+    url(r'^deldb', testdb.deldb),
 
     # url(r'$', views.index),
 
