@@ -16,8 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 
-from blog import views
-from blog import testdb
+from blog import views, testdb, search
 
 urlpatterns = [
 
@@ -31,6 +30,9 @@ urlpatterns = [
     url(r'^readdb', testdb.readdb),
     url(r'^updatedb', testdb.updatedb),
     url(r'^deldb', testdb.deldb),
+    url(r'^search$', search.search),
+    url(r'^search-form$', search.search_form),
+    url(r'^post_search$', search.post_search),
 
     # url(r'$', views.index),
 
