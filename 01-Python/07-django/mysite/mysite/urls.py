@@ -26,6 +26,9 @@ urlpatterns = [
     url(r'^hello', views.hello),
     url(r'^python', views.helloPython),
     url(r'^test', views.test),
+
+    # url(r'$', views.index),
+
     # url(r'^test2', views.test2, )
     # url() 可以接收四个参数，分别是两个必选参数：regex、view 和两个可选参数：kwargs、name，接下来详细介绍这四个参数。
     # regex:    正则表达式，与之匹配的 URL 会执行对应的第二个参数 view。

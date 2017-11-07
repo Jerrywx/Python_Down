@@ -20,3 +20,6 @@ def test(reuqest):
     return HttpResponse("This is a Test")
 
 
+def index(req):
+    return HttpResponse("Thi is Index")
+
