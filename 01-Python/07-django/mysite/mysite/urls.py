@@ -25,7 +25,7 @@ urlpatterns = [
     # url(r'^admin/', views.hello),
     url(r'^hello', views.hello),
     url(r'^python', views.helloPython),
-    # url(r'^test', views.test),
+    url(r'^test', views.test),
     url(r'^testdb', testdb.testdb),
     url(r'^readdb', testdb.readdb),
     url(r'^updatedb', testdb.updatedb),
@@ -34,7 +34,8 @@ urlpatterns = [
     url(r'^search-form$', search.search_form),
     url(r'^post_search$', search.post_search),
 
-    # url(r'$', views.index),
+
+    url(r'index', views.index),
 
     # url(r'^test2', views.test2, )
     # url() 可以接收四个参数，分别是两个必选参数：regex、view 和两个可选参数：kwargs、name，接下来详细介绍这四个参数。

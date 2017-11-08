@@ -21,5 +21,12 @@ def test(reuqest):
 
 
 def index(req):
-    return HttpResponse("Thi is Index")
+
+    if req.method == "POST":
+        username = req.POST.get("username")
+        pwd = req.POST.get("pwd")
+        if username == "wxiao" and pwd == "123456":
+            return HttpResponse("登录成功")
+
+    return render(req, 'login.html')
 
