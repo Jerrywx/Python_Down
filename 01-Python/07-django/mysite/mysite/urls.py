@@ -34,8 +34,13 @@ urlpatterns = [
     url(r'^search-form$', search.search_form),
     url(r'^post_search$', search.post_search),
 
-
+    # 参数
     url(r'index', views.index, name="loging"),
+
+    # 登录 参数
+    # url(r'^login', views.login),
+    url(r'^login', views.loginAction),
+
 
     # url(r'^test2', views.test2, )
     # url() 可以接收四个参数，分别是两个必选参数：regex、view 和两个可选参数：kwargs、name，接下来详细介绍这四个参数。

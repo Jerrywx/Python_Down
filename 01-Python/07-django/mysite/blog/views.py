@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 
 # Create your views here.
 
@@ -29,4 +29,30 @@ def index(req):
             return HttpResponse("登录成功")
 
     return render(req, 'login.html')
+
+
+def login(req):
+
+    name = 'wxiao!!!'
+    test = 'TTTT'
+
+    # return render(req, 'login.html', {'name':"wxiao", 'test':"TTTT"})
+    return render(req, 'login.html', locals())
+
+
+# 用户登录操作
+def loginAction(req):
+
+    if req.method == "POST":
+        username = req.POST.get("username")
+        pwd = req.POST.get("pwd")
+        if username == "wxiao" and pwd == "123":
+            return redirect('base.html')
+
+    #     print("用户名:", request.POST.get("username"))
+    #     print("用户名:", request.POST.get("pwd"))
+
+    return render(req, 'user_login_views.html')
+
+
 
