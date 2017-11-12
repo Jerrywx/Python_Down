@@ -83,11 +83,11 @@ def addbook(req):
 
     # 多表联合 多对多 插入多条数据
     # 读取作者1
-    author1 = Author.objects.filter(id="2")[0]
-    author2 = Author.objects.filter(id="5")[0]
-    book = Xbook.objects.filter(id="1")[0]
-    print("=========", author1.name, author2.name, book.type)
-    book.author.add(author1, author2)
+    # author1 = Author.objects.filter(id="2")[0]
+    # author2 = Author.objects.filter(id="5")[0]
+    # book = Xbook.objects.filter(id="1")[0]
+    # print("=========", author1.name, author2.name, book.type)
+    # book.author.add(author1, author2)
 
 
 
@@ -115,10 +115,7 @@ def getbook(req):
 
     # 读取数据
     # book = MyBook.objects.filter(id="2")[0]
-
     # str = "book:" + book.name + "<br>Type:" + book.type
-
-
 
     # 读取数据熟属性
     # name = MyBook.objects.filter(id="2").values("name")[0]
@@ -126,9 +123,17 @@ def getbook(req):
     # return  HttpResponse(str)
 
     # 批量获取
-    list = MyBook.objects.filter(name="Python")
+    # list = MyBook.objects.filter(name="Python")
+    #
+    # for obj in list[2:4]:
+    #     print("------", obj.name , obj.id)
 
-    for obj in list[2:4]:
-        print("------", obj.name , obj.id)
+    # 多对多 读取数据
+    book = Xbook.objects.filter(id="1")[0]
+    authors = book.author
+    print("0-------------", authors, book.type)
+    # for a in authors:
+    #     print("---------", a)
+
 
     return HttpResponse("成功!!")

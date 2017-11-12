@@ -56,5 +56,10 @@ ORM(对象关系映射)
     4. 查
 
 
+三、联合唯一
+
+    class Meta:
+        unique_together=["author", "book"]
+
 '''
 

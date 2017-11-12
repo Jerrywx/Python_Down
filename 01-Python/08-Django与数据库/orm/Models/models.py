@@ -50,3 +50,12 @@ class Xbook(models.Model):
     price = models.IntegerField()
     type = models.CharField(max_length=10)
     author = models.ManyToManyField("Author")
+
+
+# 创建联合唯一表
+class Book2Author(models.Model):
+    book = models.ForeignKey("Author")
+    author = models.ForeignKey("MyBook")
+
+    class Meta:
+        unique_together = ["author", "book"]
