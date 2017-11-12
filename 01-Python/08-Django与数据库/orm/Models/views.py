@@ -60,27 +60,34 @@ def addbook(req):
     #     authorer = author,
     # )
 
-    # 多表联合 插入数据
+    # 多表联合 多对多 插入一条数据
+    # author = Author()
+    # author.name = "余秋雨"
+    # author.telNum = "1111111"
+    # author.address = "未知"
+    # author.save()
+    #
+    # author2 = Author()
+    # author2.name = "余秋雨2"
+    # author2.telNum = "1111111"
+    # author2.address = "未知"
+    # author2.save()
+    #
+    # book = Xbook()
+    # book.name = "君子之道"
+    # book.price = 119
+    # book.type = "文学类"
+    # book.save()
+    #
+    # book.author.add(author)
 
-    author = Author()
-    author.name = "余秋雨"
-    author.telNum = "1111111"
-    author.address = "未知"
-    author.save()
-
-    author2 = Author()
-    author2.name = "余秋雨2"
-    author2.telNum = "1111111"
-    author2.address = "未知"
-    author2.save()
-
-    book = Xbook()
-    book.name = "君子之道"
-    book.price = 119
-    book.type = "文学类"
-    book.save()
-
-    book.author.add(author)
+    # 多表联合 多对多 插入多条数据
+    # 读取作者1
+    author1 = Author.objects.filter(id="2")[0]
+    author2 = Author.objects.filter(id="5")[0]
+    book = Xbook.objects.filter(id="1")[0]
+    print("=========", author1.name, author2.name, book.type)
+    book.author.add(author1, author2)
 
 
 
