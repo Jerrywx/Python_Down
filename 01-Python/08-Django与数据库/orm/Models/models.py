@@ -18,7 +18,7 @@ class Book(models.Model):
     name = models. CharField(max_length=20)
     price = models.CharField(max_length=20)
     type = models.CharField(max_length=10)
-    # authorer = models.ForeignKey("Author")
+    author = models.ManyToManyField("Author")
 
     # def __str__(self):
     #     return self.name
@@ -43,3 +43,10 @@ class Books(models.Model):
     price = models.IntegerField()
     type = models.CharField(max_length=10)
     authorer = models.ForeignKey("Author")
+
+
+class Xbook(models.Model):
+    namew = models.CharField(max_length=20)
+    price = models.IntegerField()
+    type = models.CharField(max_length=10)
+    author = models.ManyToManyField("Author")

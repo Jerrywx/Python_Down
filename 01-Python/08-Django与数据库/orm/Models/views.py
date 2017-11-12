@@ -8,6 +8,7 @@ from Models.models import Test
 from Models.models import Author
 from Models.models import Books
 from Models.models import MyBook
+from Models.models import Xbook
 from Models import models
 
 
@@ -46,19 +47,40 @@ def addbook(req):
     # )
 
     # 一对多 表 插入数据        方法一:
+    # author = Author()
+    # author.name = "wxiao"
+    # author.telNum = "17718576672"
+    # author.address = "Beijing"
+    # author.save()
+    #
+    # Books.objects.create(
+    #     namew = "iOS 开发",
+    #     price = 78,
+    #     type = "iOS",
+    #     authorer = author,
+    # )
+
+    # 多表联合 插入数据
+
     author = Author()
-    author.name = "wxiao"
-    author.telNum = "17718576672"
-    author.address = "Beijing"
+    author.name = "余秋雨"
+    author.telNum = "1111111"
+    author.address = "未知"
     author.save()
 
-    Books.objects.create(
-        namew = "iOS 开发",
-        price = 78,
-        type = "iOS",
-        authorer = author,
-    )
+    author2 = Author()
+    author2.name = "余秋雨2"
+    author2.telNum = "1111111"
+    author2.address = "未知"
+    author2.save()
 
+    book = Xbook()
+    book.name = "君子之道"
+    book.price = 119
+    book.type = "文学类"
+    book.save()
+
+    book.author.add(author)
 
 
 

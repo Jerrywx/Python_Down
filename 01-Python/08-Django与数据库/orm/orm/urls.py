@@ -23,5 +23,5 @@ urlpatterns = [
     url(r'^test', views.test),
     url(r'^addBook', views.addbook),
     url(r'getBook', views.getbook),
-    
+
 ]
