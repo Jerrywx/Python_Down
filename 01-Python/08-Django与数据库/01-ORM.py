@@ -61,5 +61,9 @@ ORM(对象关系映射)
     class Meta:
         unique_together=["author", "book"]
 
+
+四、日志打印
+
+
 '''
 
