@@ -3,6 +3,7 @@
 '''
 
 一、执行命令
+    1. 创建 mysite 项目
     django-admin strtproject mysite
 
 
