@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录</title>
+</head>
+<body>
+    <div>
+        <h3>登录界面!</h3>
+
+        <form action="login.html" method="post">
+            <div>
+            <label for="user">用户名:</label>
+            <input id="user" type="text" name="username"/>
+            </div>
+
+            <div>
+                <label for="pwd">密码:</label>
+                <input id="pwd" type="password" name="password"/>
+            </div>
+
+            <div>
+                <label></label>
+                <input type="submit" value="登录" />
+                <span style="color:red">{{msg}}</span>
+            </div>
+        </form>
+
+    </div>
+
+</body>
+</html>
