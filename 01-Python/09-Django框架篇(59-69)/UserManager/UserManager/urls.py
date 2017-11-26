@@ -21,7 +21,17 @@ from users import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^login', views.login),
+
+    # 登录
+    # url(r'^login', views.login),
+    url(r'^login', views.Login.as_view()),
+
+    # 注销
+    url(r'^logout', views.login),
     url(r'^index', views.index),
+    url(r'^classes', views.index),
+
     url(r'^js_cookie', views.js_cookie),
+    url(r'^session', views.session),
+
 ]
