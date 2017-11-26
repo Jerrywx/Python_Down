@@ -99,3 +99,18 @@ def session(request):
     request.session['value'] = "kkkk"
     print("------------- session")
     return HttpResponse("OK")
+
+
+# classes
+def classes(request):
+    return render(request, 'classes.html')
+    # return HttpResponse("classes")
+
+# student
+def student(request):
+    return render(request, 'student.html')
+
+# teacher
+def teacher(request):
+    return render(request, 'teacher.html')
+

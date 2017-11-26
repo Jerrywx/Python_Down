@@ -29,7 +29,12 @@ urlpatterns = [
     # 注销
     url(r'^logout', views.login),
     url(r'^index', views.index),
-    url(r'^classes', views.index),
+    # 班级
+    url(r'^classes', views.classes),
+    # 学生
+    url(r'^student', views.student),
+    # 老师
+    url(r'^teacher', views.teacher),
 
     url(r'^js_cookie', views.js_cookie),
     url(r'^session', views.session),

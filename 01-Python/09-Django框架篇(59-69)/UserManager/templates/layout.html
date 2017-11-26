@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理系统</title>
+
+    <style type="text/css">
+
+        * {
+            padding: 0px;
+            margin: 0px;
+        }
+
+        .header {
+            height: 48px;
+            background-color: #5F5F5F;
+            color: white;
+        }
+
+        .userInfo {
+            float: right;
+            height: 48px;
+            margin-left: 80px;
+
+        }
+
+        .a {
+            color: black;
+        }
+
+        /*  */
+        .leftBar {
+            position: absolute;
+            background-color: #F1F1F1;
+            width: 200px;
+            /*height: 800px;*/
+            left: 0px;
+            top: 48px;
+            bottom: 0px;
+        }
+
+        .leftBar a {
+            display: block;
+            width: 180px;
+            padding: 5px 0px;
+            padding-left: 20px;
+        }
+
+        .leftBar a:hover {
+            background-color: #DDDDDD;
+        }
+
+        .content {
+            position: absolute;
+            left: 200px;
+            top: 48px;
+            bottom: 0px;
+            right: 0px;
+            background-color: white;
+        }
+
+    </style>
+
+    {% block css %} {% endblock %}
+
+</head>
+<body>
+
+    <!--<h4>Hello {{username}} !</h4>-->
+
+    <div class="box">
+
+        <!-- 头部用户信息 -->
+        <div class="header">
+            <div class="userInfo">
+                <span style="color: black">用户名:{{useranme}}</span>
+                <br>
+                <a href="/logout.html">注销</a>
+            </div>
+
+        </div>
+
+
+        <!-- 左侧导航栏 -->
+        <div class="leftBar">
+
+            <ul>
+                <li>
+                    <a href="/classes.html">班级管理</a>
+                </li>
+
+                <li>
+                    <a href="/student.html">学生管理</a>
+                </li>
+
+                <li>
+                    <a href="/teacher.html">老师管理</a>
+                </li>
+            </ul>
+
+        </div>
+
+        <!-- 右侧内容 -->
+        <div class="content">
+            {% block content %} {% endblock %}
+        </div>
+
+    </div>
+
+    {% block js %} {% endblock %}
+
+</body>
+</html>
