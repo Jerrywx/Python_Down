@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>userInfo</title>
+
+    <!--<script src="/statics/jquery-3.2.1.js"></script>-->
+    <script src="/static/jquery-3.2.1.js"></script>
+    <!--<script src="/static/jquery.cookie.js"></script>-->
+</head>
+<body>
+
+    <h3>This is userInfo!</h3>
+
+    <form action="/userInfo/" method="post">
+
+        <label>用户名:</label><input name="username" type="text">
+        <br/>
+        <label>性别:</label><input name="sex" type="text">
+        <br/>
+        <label>邮箱:</label> <input name="emial" type="text">
+        <br/>
+
+        <input type="submit" value="提交">
+    </form>
+
+    <table>
+
+        <tr>
+            <td>姓名</td>
+            <td>性别</td>
+            <td>邮箱</td>
+        </tr>
+
+        {% for user in userList %}
+            <tr>
+                <td>{{user.username}}</td>
+                <td>{{user.sex}}</td>
+                <td>{{user.emial}}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+
+    <script>
+        $('h3').css("color","red")
+    </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
