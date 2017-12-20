@@ -1,5 +1,5 @@
-from django.db import models
 from django.contrib.auth.models import User
+from django.db import models
 
 
 # 客户信息表
@@ -229,7 +229,7 @@ class Payment(models.Model):
     # 数额
     amount = models.PositiveIntegerField(verbose_name="数额", default=500)
     # 负责人
-    consultant = models.ForeignKey(UserProfile)
+    consultant = models.ForeignKey("UserProfile")
     # 时间
     date = models.DateTimeField(auto_now_add=True)
 
