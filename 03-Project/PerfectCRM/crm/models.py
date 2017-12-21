@@ -38,6 +38,11 @@ class Customer(models.Model):
     note = models.TextField(blank=True, null=True)
     # 标签
     tags = models.ManyToManyField("Tag", blank=True, null=True)
+    # 用户状态
+    status_choices = ((0, "已报名"),
+                      (1, "未报名"),
+                      )
+    status = models.SmallIntegerField(choices=status_choices, default=1)
 
     def __str__(self):
         return self.qq
