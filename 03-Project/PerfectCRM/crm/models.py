@@ -259,7 +259,24 @@ class UserProfile(models.Model):
 # 角色表
 class Role(models.Model):
     '''角色表'''
+    # 名字
     name = models.CharField(max_length=32, unique=True)
+    # 菜单
+    menus = models.ManyToManyField("Menu", blank=True)
 
     def __str__(self):
         return self.name
+
+
+# 菜单
+class Menu(models.Model):
+    '''菜单'''
+    # 菜单名
+    name = models.CharField(max_length=32)
+    # 对应url
+    url_name = models.CharField(max_length=64);
+
+    def __str__(self):
+        return self.name
+
+
