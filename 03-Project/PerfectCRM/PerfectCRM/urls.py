@@ -17,7 +17,12 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 urlpatterns = [
+    # Django 数据库管理
     url(r'^admin/', admin.site.urls),
+    # 主程序
     url(r'^crm/', include("crm.urls")),
+    # 学生部分
     url(r'^student/', include("student.urls")),
+    # 数据处理
+    url(r'^king_admin/', include("king_admin.urls")),
 ]
