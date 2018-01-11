@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+    <link rel="stylesheet" href="static/commons.css">
+</head>
+<body>
+
+    <form method="post" action="index">
+        <input type="text" name="name">
+        <input type="submit" value="提交">
+    </form>
+
+    <h1>{{func("aaa")}}</h1>
+    <h1>{% module custom() %}</h1>
+    <h1>展示内容</h1>
+
+    <ul>
+        {% for item in list %}
+        <li>{{item}}</li>
+        {% end %}
+    </ul>
+
+
+</body>
+</html>
