@@ -59,11 +59,13 @@ for tag in tags:
     movie.title = tag.attrs["data-title"]
     # 相关视频地址
     movie.trailer = tag.attrs["data-trailer"]
-
-    movies.append(movie)
+    # 电影封面
+    movie.cover = tag.img.attrs["src"]
+    # 豆瓣地址
+    movie.threadUrl = tag.a.attrs["href"]
 
     print(movie)
-
+    movies.append(movie)
 
     # ls = tag.li
     # for li in ls:

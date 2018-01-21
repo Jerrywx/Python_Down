@@ -1,0 +1,5 @@
+4、set_status(status_code, reason=None)
+    为响应设置状态码。
+    参数说明:
+    1. status_code  int 类型, 状态码, 若reason为None,则状态码必须为下表中的。
+    2. reason   string类型, 描述状态码的词组, 若为None, 则会被自动填充为下表的内容。
