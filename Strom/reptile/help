@@ -1,0 +1,11 @@
+BeautifulSoup
+
+1、通过id寻找标签
+    soup.find_all(id="info")
+2、通过标签名
+    soup.find('body')
+3、通过class查找
+    soup..find_all('span', class_="actor")
+
+3、根据属性获取属性值
+    tag.a.attrs["href"]
