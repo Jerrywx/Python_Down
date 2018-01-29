@@ -1,6 +1,7 @@
 
 
 import scrapy
+from scrapy.selector import HtmlXPathSelector
 
 class XiaoHua(scrapy.spiders.Spider):
     name = "s1"
@@ -12,4 +13,8 @@ class XiaoHua(scrapy.spiders.Spider):
     def parse(self, response):
         current_url = response.url
         body = response.body
-        print(response.body_as_unicode())
+        # print(response.body_as_unicode())
+
+        hxs = HtmlXPathSelector(response)
+        items = hxs.select('//div[@class="item masonry_brick"]').extract_first()
+        print(items)

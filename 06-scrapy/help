@@ -1,5 +1,14 @@
 1、创建项目
     scrapy startproject spider1
 
+    目录:
+    scrapy.cfg 文件:  项目的配置文件
+    spider1 目录:     该项目的python模块。
+    spider1/items.py  项目中的item文件。
+    spider1/pipelines.py    项目中的pipelines 文件
+    spider1/settings.py     项目的设置文件
+    spider1/spiders         存放爬虫代码的文件
+
+
 2、启动
     scrapy crawl spider_name --nolog

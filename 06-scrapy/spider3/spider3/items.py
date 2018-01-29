@@ -8,12 +8,11 @@
 import scrapy
 
 
-class Spider1Item(scrapy.Item):
+class Spider3Item(scrapy.Item):
     # define the fields for your item here like:
     # name = scrapy.Field()
     # pass
-
-    name =  scrapy.Field()
-    school = scrapy.Field()
-    imgUrl = scrapy.Field()
+    title = scrapy.Field()
+    link  = scrapy.Field()
+    desc  = scrapy.Field()
 
