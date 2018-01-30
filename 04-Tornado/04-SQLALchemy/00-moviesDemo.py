@@ -69,9 +69,6 @@ class Actors(Base):
     # 性别
     sex = Column(String(1))
 
-
-
-
 Base.metadata.create_all(engine)
 # Base.metadata.drop_all(engine)
 

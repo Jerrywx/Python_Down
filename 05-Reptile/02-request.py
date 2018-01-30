@@ -11,7 +11,7 @@ ua_heaeders = {
 
 # 通过 urllib.request() 方法构造一个请求对象
 # request = urllib.request.Request("http://www.80s.tw/", headers = ua_heaeders)
-request = urllib.request.Request("https://movie.douban.com/", headers = ua_heaeders)
+request = urllib.request.Request("https://movie.douban.com/j/search_subjects?type=movie&tag=%e7%83%ad%e9%97%a8&sort=recommend&page_limit=20&page_start=20", headers = ua_heaeders)
 
 # 向指定url地址发送请求
 response = urllib.request.urlopen(request)

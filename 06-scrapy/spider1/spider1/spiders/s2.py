@@ -44,7 +44,7 @@ class Woman(scrapy.spiders.Spider):
             person['school'] = school
             person['imgUrl'] = url
             list.append(person)
-            # print(name + "\t\t" + school + "\t" + url)
+            print(name + "\t\t" + school + "\t" + url)
 
         return list
 

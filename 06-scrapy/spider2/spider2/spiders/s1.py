@@ -5,8 +5,10 @@ class DoubanScrapy(Spider):
     """docstring for DoubanScrapy"""
     name = 'douban'
     # 爬虫起始url
-    # start_urls = ["https://movie.douban.com"]
-    start_urls = ["file:///Users/wxiao/%E5%B7%A5%E4%BD%9C/Python_Down/06-scrapy/spider2/index.html"]
+    start_urls = ["https://www.baidu.com/"]
+    # start_urls = ["file:///Users/wxiao/%E5%B7%A5%E4%BD%9C/Python_Down/06-scrapy/spider2/index.html"]
+
+    # start_urls = ["https://movie.douban.com/j/search_subjects?type=movie&tag=热门&sort=recommend&page_limit=20&page_start=20"]
 
     def start_request(self):
         yield Request(self.start_urls, callback = self.parse)
