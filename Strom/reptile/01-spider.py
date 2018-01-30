@@ -54,16 +54,13 @@ engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset
 Base = declarative_base()
 
 # =============================================================================================
-# file = open("./resource/list.json", "r")
-
 # 读取json文件
-# print("=======================")
-# print(type(html.decode("utf-8")))
-# print("=======================")
+# file = open("./resource/list.json", "r")
+# content = json.loads(file)
+
+# 读取web内容
 content = json.loads(html.decode("utf-8"))
 
-# print(type(content))
-# print("=======================")
 
 movies = []
 Session = sessionmaker(bind=engine)
@@ -71,7 +68,6 @@ session = Session()
 
 # 遍历数据
 for item in content['subjects']:
-    print("=================" + item['title'])
     movie = Movie()
     movie.movie_name_cn = item['title']
     movie.movie_douban_mark = item['rate']
