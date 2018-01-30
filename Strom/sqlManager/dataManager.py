@@ -2,7 +2,7 @@
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, MetaData, Boolean, Float
+from sqlalchemy import Column, Integer, String, MetaData, Boolean, Float, UniqueConstraint, Index
 from sqlalchemy.orm import sessionmaker, relationship
 
 
@@ -51,6 +51,8 @@ class Movie(Base):
     movie_douban_mark   = Column(String(32))
     # 豆瓣地址
     movie_doubanUrl     = Column(String(256))
+    # 豆瓣 ID
+    movie_douban_id     = Column(Integer)
     # 烂番茄
     movie_tomato_mark1  = Column(String(32))
     movie_tomato_mark2  = Column(String(32))
@@ -70,28 +72,14 @@ class Movie(Base):
     movie_resource      = Column(String(2048))          #???
 
 
+    # ------------------------------------------------ 联合唯一
+    __table_args__ = (
+        UniqueConstraint('movie_douban_id', 'movie_name_cn', name='uix_id_name'),
+        Index('ix_id_name', 'movie_douban_id', 'movie_name_cn'),
+    )
 
 # 创建表
 Base.metadata.create_all(engine)
-
-
-
-
-#
-#
-# Session = sessionmaker(bind=engine)
-# session = Session()
-#
-# movie = Movie()
-# movie.movie_name_cn = "电影名字"
-# movie.movie_name_en = "name"
-#
-#
-#
-#
-# session.add_all([movie])
-# session.commit()
-
 
 
 
