@@ -1,3 +1,6 @@
+
+
+
 import urllib.request
 import ssl
 import json
@@ -9,10 +12,59 @@ from sqlalchemy.orm import sessionmaker, relationship
 import sys
 sys.path.append("../sqlManager")
 from dataManager import Movie
+from enum import Enum
 
-type = ["热门", "最新", "经典", "可播放", "豆瓣高分",
-        "冷门佳片", "华语", "欧美", "韩国", "日本",
-        "动作", "喜剧", "爱情", "科幻", "悬疑", "恐怖", "治愈"]
+
+# 电影分类
+class MovieClass(Enum):
+    Hot         = "热门"
+    New         = "最新"
+    Classic     = "经典"
+    Play        = "可播放"
+    Top         = "豆瓣高分"
+    Dark        = "冷门佳片"
+    Chinese     = "华语"
+    America     = "欧美"
+    Korean      = "韩国"
+    Japan       = "日本"
+    Action      = "动作"
+    Comedy      = "喜剧"
+    Love        = "爱情"
+    Science     = "科幻"
+    Suspense    = "悬疑"
+    Terrify     = "恐怖"
+    Cure        = "治愈"
+
+# 热度 recommend
+# 时间 time
+# 评价 rank
+
+# 获取电影列表url
+def getMovieListUrl(type, sort, pageLimit, pageStrat):
+
+    # 电影分类
+    movieClass = Enum("热门", "最新", "经典", "可播放", "豆瓣高分",
+                    "冷门佳片", "华语", "欧美", "韩国", "日本",
+                    "动作", "喜剧", "爱情", "科幻", "悬疑", "恐怖", "治愈")
+
+    # print(movieClass.)
+
+    # urlString = "https://movie.douban.com/j/search_subjects?" \
+    #             "type=movie&tag=%e6%9c%80%e6%96%b0&" \
+    #             "sort=recommend&" \
+    #             "page_limit=100&" \
+    #             "page_start=500"
+
+    # 电影分类
+    # movieClass = ["热门", "最新", "经典", "可播放", "豆瓣高分",
+    #                 "冷门佳片", "华语", "欧美", "韩国", "日本",
+    #                 "动作", "喜剧", "爱情", "科幻", "悬疑", "恐怖", "治愈"]
+
+    # 电影类型
+
+    pass
+
+
 
 baseUrl = "https://movie.douban.com/j/search_subjects"
 

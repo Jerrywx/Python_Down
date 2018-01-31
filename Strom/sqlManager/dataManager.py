@@ -78,6 +78,44 @@ class Movie(Base):
         Index('ix_id_name', 'movie_douban_id', 'movie_name_cn'),
     )
 
+# 演员
+class Celebrity(Base):
+
+    # 设置表名
+    __tablename__ = "celebrity"
+
+    # 设置ID 类型 主键
+    id = Column(Integer, primary_key=True)
+
+    # ------------------------------------------------ 基本信息【中文名、英文名、别名、昵称、性别、出生地】
+    # 人名
+    # 中文名
+    name_cn     = Column(String(64))
+    # 英文名
+    name_en     = Column(String(64))
+    # 别名
+    name_other  = Column(String(512))
+    # 昵称
+    name_aka    = Column(String(512))
+
+
+    # 性别
+    gender      = Column(String(3))
+    # 出生地
+    bornPlace   = Column(String(128))
+
+    # 作品
+    works       = Column(String(1024))
+
+    # 图片
+    image       = Column(String(256))
+
+    # ------------------------------------------------ 豆瓣
+    # 豆瓣链接
+    doubanUrl   = Column(String(256))
+
+
+
 # 创建表
 Base.metadata.create_all(engine)
 
