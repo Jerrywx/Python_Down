@@ -356,6 +356,5 @@ class Resource(Base):
 Base.metadata.create_all(engine)
 
 
-
 # if __name__ == '__main__':
 #     print(sqlalchemy.__version__)
