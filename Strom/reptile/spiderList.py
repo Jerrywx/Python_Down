@@ -1,5 +1,4 @@
 
-
 import urllib.request
 import ssl
 import json
@@ -8,8 +7,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 import sys
 sys.path.append("../sqlManager")
-from movieApi import top250, baseApi, celebrity
-from dataManager import Movie
+from movieApi import top250, baseApi, celebrity, movieInfo
+from dataManager import Movie, Country, MovieType
 
 # 抓取 Json 数据
 def spiderTop250():
@@ -53,15 +52,13 @@ def storeTop250():
 
     # 4. 遍历数据
     for item in content["subjects"]:
-        # print(item['title'])
 
         # 检查电影是否存在
         ret = session.query(Movie).filter_by(movie_douban_id=item['id']).first()
         if ret:
             print("---- 存在的电影:" + item['title'])
         else:
-            print("===== 不存在的电影:" + item['title'])
-
+            print("--------------------:" + item['title'])
             movie = Movie()
             # 名称
             movie.movie_name_cn     = item['title']
@@ -75,8 +72,8 @@ def storeTop250():
             movie.movie_doubanUrl   = item['alt']
 
             # 类型
-            types = item['genres']
-            movie.movie_type = ','.join(types)
+            # types = item['genres']
+            # movie.movie_type = ','.join(types)
 
             # 上映时间
             movie.movie_release = item['year']
@@ -112,7 +109,7 @@ def spiderMovieDetial():
     }
 
     # 3. 拼接url 创建请求
-    urlString = baseApi + celebrity
+    urlString = baseApi + movieInfo
     urlString = urlString.replace("{id}", movieId)
 
     request = urllib.request.Request(urlString, headers=ua_heaeders)
@@ -138,48 +135,116 @@ def storeMovieDetial():
     session = Session()
 
     # 3. 读取文件中的 json
-    file = open("./resource/list2.json", "r")
+    file = open("./resource/movieDetial.json", "r")
     content = json.loads(file.read())
 
-    # 4. 遍历数据
-    for item in content["subjects"]:
-        # print(item['title'])
+    # 获取 电影ID
+    movieId = content['id']
 
-        # 检查电影是否存在
-        ret = session.query(Movie).filter_by(movie_douban_id=item['id']).first()
-        if ret:
-            print("---- 存在的电影:" + item['title'])
-        else:
-            print("===== 不存在的电影:" + item['title'])
+    # 根据 id 从数据库获取电影
 
-            movie = Movie()
-            # 名称
-            movie.movie_name_cn = item['title']
-            # id
-            movie.movie_douban_id = item['id']
-            # 评分
-            movie.movie_douban_mark = item['rating']['average']
-            # 封面
-            movie.movie_cover = item['images']['large']
-            # 豆瓣链接
-            movie.movie_doubanUrl = item['alt']
+    movie = session.query(Movie).filter_by(movie_douban_id=movieId).first()
 
-            # 类型
-            types = item['genres']
-            movie.movie_type = ','.join(types)
 
-            # 上映时间
-            movie.movie_release = item['year']
+    if movie:
+        print("------------------------------")
 
-            session.add(movie)
+        # ------------------------------------- 更新英文名字
+        movie.movie_name_en = content['original_title']
 
-    session.commit()
+        # ------------------------------------- 更新描述
+        # summary
+
+        # ------------------------------------- 更新别名
+        otherName = content['aka']
+        movie.movie_name_ot = ",".join(otherName)
+
+        # ------------------------------------- 获取国家
+        country = content['countries']
+        countrys = []
+        for name in country:
+
+            # 1. 检测国家是否已经存在
+            country = session.query(Country).filter_by(name = name).first()
+
+            if country == None:
+                c = Country()
+                c.name = name
+                countrys.append(c)
+            else:
+                print("---- 已经存在:" + name)
+
+        # 更新国家
+        session.add_all(countrys)
+        movie.movie_location = countrys
+
+        # ------------------------------------- 类别
+        types = content['genres']
+        typeList = []
+
+        for type in types:
+
+            # 1. 检测类型是否存在
+            ty = session.query(MovieType).filter_by(type=type).first()
+
+            if ty == None:
+                t = MovieType()
+                t.type = type
+                typeList.append(t)
+            else:
+                print("----- 类型存在")
+
+        session.add_all(typeList)
+        movie.movie_type = typeList
+
+        # ------------------------------------- 类别
+
+
+
+        session.commit()
+    else:
+        print("========= 电影不存在")
+
+    # # 4. 遍历数据
+    # for item in content["subjects"]:
+    #     # print(item['title'])
+    #
+    #     # 检查电影是否存在
+    #     ret = session.query(Movie).filter_by(movie_douban_id=item['id']).first()
+    #     if ret:
+    #         print("---- 存在的电影:" + item['title'])
+    #     else:
+    #         print("===== 不存在的电影:" + item['title'])
+    #
+    #         movie = Movie()
+    #         # 名称
+    #         movie.movie_name_cn = item['title']
+    #         # id
+    #         movie.movie_douban_id = item['id']
+    #         # 评分
+    #         movie.movie_douban_mark = item['rating']['average']
+    #         # 封面
+    #         movie.movie_cover = item['images']['large']
+    #         # 豆瓣链接
+    #         movie.movie_doubanUrl = item['alt']
+    #
+    #         # 类型
+    #         types = item['genres']
+    #         movie.movie_type = ','.join(types)
+    #
+    #         # 上映时间
+    #         movie.movie_release = item['year']
+    #
+    #         session.add(movie)
+    #
+    # session.commit()
 
     pass
 
 # spiderMovieDetial()
-
-
+# storeTop250()
+# 保存电影详细信息
+storeMovieDetial()
 
 
 

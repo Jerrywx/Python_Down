@@ -12,6 +12,7 @@ engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset
 Base = declarative_base()
 
 
+# =============================================== 电影 与其他表关系
 # 电影 和 人 关系 【演员、导演、编剧】
 class ActorToMovie(Base):
 
@@ -25,9 +26,105 @@ class ActorToMovie(Base):
     # 人员
     actor_id = Column(Integer, ForeignKey('celebrity.id'))
     # 关系
-    relationship = Column(Integer)
-#     主演、导演、演员、编剧
+    relationship = Column(Integer) # 主演、导演、演员、编剧
 
+# 电影 和 类型
+class TypeToMovie(Base):
+
+    __tablename__ = "type_to_movie"
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影
+    movie_id = Column(Integer, ForeignKey('movie.id'))
+    # 电影类型
+    type_id = Column(Integer, ForeignKey('movietype.id'))
+
+# 电影 和 国家
+class CountryToMovie(Base):
+
+    __tablename__ = "country_to_movie"
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影
+    movie_id = Column(Integer, ForeignKey('movie.id'))
+    # 电影类型
+    country_id = Column(Integer, ForeignKey('country.id'))
+
+# 电影 和 图片
+class ImageToMovie(Base):
+    # 表名
+    __tablename__ = "image_to_movie"
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影
+    movie_id = Column(Integer, ForeignKey('movie.id'))
+    # 电影类型
+    image_id = Column(Integer, ForeignKey('images.id'))
+
+# 电影 和 视频
+class VoideToMovie(Base):
+    # 表名
+    __tablename__ = "video_to_movie"
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影
+    movie_id = Column(Integer, ForeignKey('movie.id'))
+    # 电影类型
+    video_id = Column(Integer, ForeignKey('video.id'))
+
+# 电影 和 资源
+class ResourceToMovie(Base):
+    # 表名
+    __tablename__ = "resource_to_movie"
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影
+    movie_id = Column(Integer, ForeignKey('movie.id'))
+    # 电影类型
+    resource_id = Column(Integer, ForeignKey('resource.id'))
+
+# =============================================== 电影人 与其他表关系
+
+# 电影人 和 图片
+class ImageToCelebrity(Base):
+    __tablename__ = "image_to_celebrity"
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影人
+    celebrity_id = Column(Integer, ForeignKey('celebrity.id'))
+    # 电影类型
+    image_id = Column(Integer, ForeignKey('images.id'))
+
+# 电影人 和 国家
+class CountryToCelebrity(Base):
+    __tablename__ = "country_to_celebrity"
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影人
+    celebrity_id = Column(Integer, ForeignKey('celebrity.id'))
+    # 电影类型
+    country_id = Column(Integer, ForeignKey('country.id'))
+
+# 电影人 和 视频
+class VideoToCelebrity(Base):
+    #
+    __tablename__ = "video_to_celebrity"
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影人
+    celebrity_id = Column(Integer, ForeignKey('celebrity.id'))
+    # 视频
+    video_id = Column(Integer, ForeignKey('video.id'))
+
+
+# =============================================== 基础表
 
 # 电影
 class Movie(Base):
@@ -51,12 +148,15 @@ class Movie(Base):
     movie_name_ot   = Column(String(128))
     # 电影封面 url地址
     movie_cover     = Column(String(256))
+    # 电影简介
+    # movie_summary   = Column(String(2048))
 
     # ------------------------------------------------ 电影信息【时长、发行地、类型、上映时间、语言】
     # 电影时长
     movie_length    = Column(Integer)
     # 电影发行地
-    movie_location  = Column(String(32))
+    # movie_location  = Column(String(32))
+    movie_location  = relationship("Country", secondary=CountryToMovie.__table__, backref='works')
     # 电影上映时间
     movie_release   = Column(String(128))
     # 语言
@@ -77,7 +177,7 @@ class Movie(Base):
     # ------------------------------------------------ 主演导演编剧 【导演、编剧、主演、演员】
     # 主演列表
     # movie_actors        = Column(String(256))           #???
-    movie_actors = relationship("Men", secondary=ActorToMovie.__table__, backref='works')
+    movie_actors          = relationship("Celebrity", secondary=ActorToMovie.__table__, backref='works')
 
     # movie_actors2       = Column(String(256))           #???
     # 导演列表
@@ -86,19 +186,24 @@ class Movie(Base):
     # movie_writer        = Column(String(256))           #???
 
     # 电影类型
-    movie_type          = Column(String(128))           # ???
+    # movie_type          = Column(String(128))           # ???
+    movie_type            = relationship("MovieType", secondary=TypeToMovie.__table__, backref='works')
 
     # ------------------------------------------------ 电影资源【预告、照片、解析、原片】
     # 电影资源
-    movie_resource      = Column(String(2048))          #???
+    # movie_resource      = Column(String(2048))          #???
+    movie_resource        = relationship("Resource", secondary=ResourceToMovie.__table__, backref='works')
 
+    # 图片
+    movie_images        = relationship("Image", secondary=ImageToMovie.__table__, backref="works")
+    # 视频
+    movie_video         = relationship("Video", secondary=VoideToMovie.__table__, backref='works')
 
     # ------------------------------------------------ 联合唯一
     __table_args__ = (
         UniqueConstraint('movie_douban_id', 'movie_name_cn', name='uix_id_name'),
         Index('ix_id_name', 'movie_douban_id', 'movie_name_cn'),
     )
-
 
 # 演员
 class Celebrity(Base):
@@ -124,13 +229,17 @@ class Celebrity(Base):
     # 性别
     gender      = Column(String(3))
     # 出生地
-    bornPlace   = Column(String(128))
+    # bornPlace   = Column(String(128))
+    bornPlace   = relationship("Country", secondary=CountryToCelebrity.__table__, backref='celebrity')
+    # 视频
+    video       = relationship("Video", secondary=VideoToCelebrity.__table__, backref='celebrity')
 
     # 作品
     # works       = Column(String(1024))
 
     # 图片
-    image       = Column(String(256))
+    # image       = Column(String(256))
+    images      = relationship("Image", secondary=ImageToCelebrity.__table__, backref='celebrity')
 
     # ------------------------------------------------ 豆瓣
     # 豆瓣链接
@@ -149,6 +258,11 @@ class MovieType(Base):
     # 权重
     weight = Column(Integer)
 
+    __table_args__ = (
+        UniqueConstraint('type', name='uix_type'),
+        Index('ix_type', 'type'),
+    )
+
 # 国家
 class Country(Base):
 
@@ -160,6 +274,11 @@ class Country(Base):
 
     # 国家名
     name = Column(String(32))
+
+    __table_args__ = (
+        UniqueConstraint('name', name='uix_name'),
+        Index('ix_name', 'name'),
+    )
 
 # 图片
 class Image(Base):
@@ -186,6 +305,50 @@ class Image(Base):
     desc        = Column(String(256))
     # MD5
     md5         = Column(String(32))
+
+# 视频
+class Video(Base):
+
+    __tablename__ = "video"
+
+    id          = Column(Integer, primary_key=True)
+
+    # 类型
+    type        = Column(Integer)
+    # 截图
+    image       = Column(String(256))
+    # 描述
+    desc        = Column(String(512))
+    # 附加内容
+    attach      = Column(String(512))
+
+    # 创建时间
+    time        = Column(String(32))
+    # 时长
+    length      = Column(Integer)
+
+    # 发布人
+    person_id   = Column(Integer)
+
+# 电影资源
+class Resource(Base):
+    # 表名
+    __tablename__ = "resource"
+
+    id = Column(Integer, primary_key=True)
+
+    low         = Column(String(1024))
+    medio       = Column(String(1024))
+    height      = Column(String(1024))
+
+    com_low     = Column(String(1024))
+    com_medio   = Column(String(1024))
+    com_height  = Column(String(1024))
+
+    back        = Column(String(1024))
+
+
+    othre_link = Column(String(1024))
 
 
 
