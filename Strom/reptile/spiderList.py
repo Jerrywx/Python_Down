@@ -10,6 +10,7 @@ sys.path.append("../sqlManager")
 from movieApi import top250, baseApi, celebrity, movieInfo
 from dataManager import Movie, Country, MovieType, Celebrity
 
+# ==========================================================
 # 抓取 Json 数据
 def spiderTop250():
     # 1. 处理 https
@@ -33,7 +34,6 @@ def spiderTop250():
     # 6. 保存json
     file = open("./resource/list2.json", "w")
     file.write(html.decode("utf-8"))
-
 
 # 存储 Json 数据
 def storeTop250():
@@ -83,11 +83,11 @@ def storeTop250():
     session.commit()
 
 
+# ==========================================================
 # 获取单个电影详细信息
 def spiderMovieDetial():
 
     # 0 从数据库中获取电影
-
     # 1. 链接数据库
     engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset=utf8', echo=False)
     # 2. 创建数据库表
@@ -123,7 +123,6 @@ def spiderMovieDetial():
     # 6. 保存json
     file = open("./resource/movieDetial.json", "w")
     file.write(html.decode("utf-8"))
-
 
 def storeMovieDetial():
     # 1. 链接数据库
@@ -242,11 +241,77 @@ def storeMovieDetial():
 
     pass
 
+
+# ==========================================================
+# 获取电影人信息
+def spiderCelebrity():
+
+    # 1. 链接数据库
+    engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset=utf8', echo=False)
+    # 2. 创建数据库表
+    Base = declarative_base()
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    # 获取第一个电影
+    item = session.query(Celebrity).first()
+    pId = str(item.douban_id)
+
+    print("========== 电影人ID", pId)
+
+    # 1. 处理 https
+    ssl._create_default_https_context = ssl._create_unverified_context
+
+    # 2. 自定义 User_Agent
+    ua_heaeders = {
+        "User_Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+    }
+
+    # 3. 拼接url 创建请求
+    urlString = baseApi + celebrity
+    urlString = urlString.replace("{id}", pId)
+
+    request = urllib.request.Request(urlString, headers=ua_heaeders)
+
+    # 4. 向指定url地址发送请求
+    response = urllib.request.urlopen(request)
+
+    # 5. read() 方法读取文件里的全部内容，返回字符串
+    html = response.read()
+
+    # 6. 保存json
+    file = open("./resource/celebrity.json", "w")
+    file.write(html.decode("utf-8"))
+
+# 保存电影人信息
+def storeCelebrity():
+    # 1. 链接数据库
+    engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset=utf8', echo=False)
+    # 2. 创建数据库表
+    Base = declarative_base()
+
+    Session = sessionmaker(bind=engine)
+    session = Session()
+
+    # 3. 读取文件中的 json
+    file = open("./resource/celebrity.json", "r")
+    content = json.loads(file.read())
+
+
+
+    # 存储数据
+
+
+    print(content)
+
+
 # spiderMovieDetial()
 # storeTop250()
 # 保存电影详细信息
-storeMovieDetial()
+# storeMovieDetial()
 
+storeCelebrity()
 
 
 

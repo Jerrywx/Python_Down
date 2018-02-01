@@ -149,7 +149,7 @@ class Movie(Base):
     # 电影封面 url地址
     movie_cover     = Column(String(256))
     # 电影简介
-    # movie_summary   = Column(String(2048))
+    movie_summary   = Column(String(2048))
 
     # ------------------------------------------------ 电影信息【时长、发行地、类型、上映时间、语言】
     # 电影时长
@@ -205,7 +205,7 @@ class Movie(Base):
         Index('ix_id_name', 'movie_douban_id', 'movie_name_cn'),
     )
 
-# 演员
+# 电影人
 class Celebrity(Base):
 
     # 设置表名
@@ -213,6 +213,8 @@ class Celebrity(Base):
 
     # 设置ID 类型 主键
     id = Column(Integer, primary_key=True)
+
+    douban_id   = Column(Integer)
 
     # ------------------------------------------------ 基本信息【中文名、英文名、别名、昵称、性别、出生地】
     # 人名
@@ -225,25 +227,24 @@ class Celebrity(Base):
     # 昵称
     name_aka    = Column(String(512))
 
-
     # 性别
     gender      = Column(String(3))
     # 出生地
-    # bornPlace   = Column(String(128))
     bornPlace   = relationship("Country", secondary=CountryToCelebrity.__table__, backref='celebrity')
     # 视频
     video       = relationship("Video", secondary=VideoToCelebrity.__table__, backref='celebrity')
 
-    # 作品
-    # works       = Column(String(1024))
-
     # 图片
-    # image       = Column(String(256))
     images      = relationship("Image", secondary=ImageToCelebrity.__table__, backref='celebrity')
 
     # ------------------------------------------------ 豆瓣
     # 豆瓣链接
     doubanUrl   = Column(String(256))
+
+    __table_args__ = (
+        UniqueConstraint('douban_id', 'name_cn', name='uix_id_name'),
+        Index('ix_id_name', 'douban_id', 'name_cn'),
+    )
 
 # 电影类型
 class MovieType(Base):
@@ -349,7 +350,6 @@ class Resource(Base):
 
 
     othre_link = Column(String(1024))
-
 
 
 # 创建表
