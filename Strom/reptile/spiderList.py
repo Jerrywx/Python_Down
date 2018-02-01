@@ -8,7 +8,7 @@ from sqlalchemy.orm import sessionmaker, relationship
 import sys
 sys.path.append("../sqlManager")
 from movieApi import top250, baseApi, celebrity, movieInfo
-from dataManager import Movie, Country, MovieType
+from dataManager import Movie, Country, MovieType, Celebrity
 
 # 抓取 Json 数据
 def spiderTop250():
@@ -153,7 +153,7 @@ def storeMovieDetial():
         movie.movie_name_en = content['original_title']
 
         # ------------------------------------- 更新描述
-        # summary
+        movie.movie_summary = content['summary']
 
         # ------------------------------------- 更新别名
         otherName = content['aka']
@@ -197,47 +197,48 @@ def storeMovieDetial():
         session.add_all(typeList)
         movie.movie_type = typeList
 
-        # ------------------------------------- 类别
+        # ------------------------------------- 电影人
+        casts = content['casts']
+        castsList = []
+        for cast in casts:
 
+            # 1. 检测电影人是否存在
+            cel = session.query(Celebrity).filter_by(douban_id=cast['id']).first()
 
+            # 2. 不存在
+            if cel == None:
+                c = Celebrity()
+                c.name_cn = cast['name']
+                c.douban_id = cast['id']
+                c.doubanUrl = cast['alt']
+                castsList.append(c)
+            else:
+                print("----- 演员存在:" + cast['name'])
+
+        casts = content['directors']
+        for cast in casts:
+
+            # 1. 检测电影人是否存在
+            cel = session.query(Celebrity).filter_by(douban_id=cast['id']).first()
+
+            # 2. 不存在
+            if cel == None:
+                c = Celebrity()
+                c.name_cn = cast['name']
+                c.douban_id = cast['id']
+                c.doubanUrl = cast['alt']
+                castsList.append(c)
+            else:
+                print("----- 导演存在:" + cast['name'])
+
+        session.add_all(castsList)
+        movie.movie_actors = castsList
+
+        # Celebrity
 
         session.commit()
     else:
         print("========= 电影不存在")
-
-    # # 4. 遍历数据
-    # for item in content["subjects"]:
-    #     # print(item['title'])
-    #
-    #     # 检查电影是否存在
-    #     ret = session.query(Movie).filter_by(movie_douban_id=item['id']).first()
-    #     if ret:
-    #         print("---- 存在的电影:" + item['title'])
-    #     else:
-    #         print("===== 不存在的电影:" + item['title'])
-    #
-    #         movie = Movie()
-    #         # 名称
-    #         movie.movie_name_cn = item['title']
-    #         # id
-    #         movie.movie_douban_id = item['id']
-    #         # 评分
-    #         movie.movie_douban_mark = item['rating']['average']
-    #         # 封面
-    #         movie.movie_cover = item['images']['large']
-    #         # 豆瓣链接
-    #         movie.movie_doubanUrl = item['alt']
-    #
-    #         # 类型
-    #         types = item['genres']
-    #         movie.movie_type = ','.join(types)
-    #
-    #         # 上映时间
-    #         movie.movie_release = item['year']
-    #
-    #         session.add(movie)
-    #
-    # session.commit()
 
     pass
 
