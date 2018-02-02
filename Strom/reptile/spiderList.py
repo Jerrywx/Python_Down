@@ -324,6 +324,44 @@ def storeCelebrity():
     file = open("./resource/celebrity.json", "r")
     content = json.loads(file.read())
 
+    # 4. 获取电影人 ID
+    pId = content['id']
+    person = session.query(Celebrity).filter_by(douban_id=pId).first()
+
+    #
+    if person == None:
+        # 不存在
+        person = Celebrity()
+
+        person.name_cn = content['name']
+        person.name_en = content['name_en']
+        names = content['aka_en']
+        person.name_other = ",".join(names)
+        person.gender = content['gender']
+        person.bornPlace = content['born_place']
+        person.doubanUrl = content['alt']
+
+        # 作品
+        for work in content['works']:
+            print(work)
+
+    else:
+        # 存在
+        pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     # 存储数据
