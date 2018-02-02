@@ -25,8 +25,13 @@ class ActorToMovie(Base):
     movie_id = Column(Integer, ForeignKey('movie.id'))
     # 人员
     actor_id = Column(Integer, ForeignKey('celebrity.id'))
+    # 多对多操作
+    movie = relationship("Movie", backref='atm')
+    cel = relationship("Celebrity", backref='atm')
     # 关系
     relationship = Column(Integer) # 主演、导演、演员、编剧
+
+
 
 # 电影 和 类型
 class TypeToMovie(Base):
@@ -141,9 +146,9 @@ class Movie(Base):
 
     # ------------------------------------------------ 电影名【中文名、英文名、别名、封面】
     # 电影中文名
-    movie_name_cn   = Column(String(32))
+    movie_name_cn   = Column(String(128))
     # 电影英文名
-    movie_name_en   = Column(String(32))
+    movie_name_en   = Column(String(128))
     # 电影其他名字
     movie_name_ot   = Column(String(128))
     # 电影封面 url地址
