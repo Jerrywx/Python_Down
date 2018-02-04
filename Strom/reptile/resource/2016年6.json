@@ -1,0 +1,40 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 108,
+    "id": 477,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 6,
+    "payload": {
+      "background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p1948.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p1949.jpg",
+      "opacity": "1",
+      "subject_id": "25983044",
+      "text": "\u8fd9\u611f\u89c9\u5176\u5b9e\u633a\u5947\u602a\u7684\uff0c\u6709\u4eba\u6765\u8868\u626c\u4f60\u8fd9\u8f88\u5b50\u6700\u60e8\u7684\u4e00\u5929\u3002"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2391542403.jpg",
+      "directors": [
+        "\u674e\u5b89 Ang Lee"
+      ],
+      "id": "25983044",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/25983044/",
+      "orig_title": "Billy Lynn's Long Halftime Walk",
+      "rating": 8.4,
+      "rating_count": 212373,
+      "title": "\u6bd4\u5229\u00b7\u6797\u6069\u7684\u4e2d\u573a\u6218\u4e8b",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/25983044/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

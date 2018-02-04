@@ -1,0 +1,39 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 231,
+    "id": 454,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 6,
+    "payload": {
+      "background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p1747.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p1757.jpg",
+      "subject_id": "26614893",
+      "text": "\u5982\u679c\u4f60\u6df1\u7231\u4e00\u4e2a\u4eba\uff0c\u4f60\u4f1a\u4e3a\u4ed6\u6321\u4e0b\u5168\u4e16\u754c\u7684\u5b50\u5f39\u3002"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2365143411.jpg",
+      "directors": [
+        "\u4fdd\u7f57\u00b7\u683c\u8bfa\u7ef4\u745f Paolo Genovese"
+      ],
+      "id": "26614893",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/26614893/",
+      "orig_title": "Perfetti sconosciuti",
+      "rating": 8.6,
+      "rating_count": 158281,
+      "title": "\u5b8c\u7f8e\u964c\u751f\u4eba",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/26614893/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

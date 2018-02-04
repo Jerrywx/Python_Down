@@ -1,0 +1,40 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 104,
+    "id": 510,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 6,
+    "payload": {
+      "background_img": "https://img3.doubanio.com/view/activity_page/raw/public/p1783.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img3.doubanio.com/view/activity_page/raw/public/p1960.jpg",
+      "subject_id": "5045678",
+      "text": "\u771f\u6b63\u7684\u5fd8\u8bb0\u662f\u4e0d\u9700\u8981\u52aa\u529b\u7684\u3002"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2361744534.jpg",
+      "directors": [
+        "\u6881\u65cb Xuan Liang",
+        "\u5f20\u6625 Chun Zhang"
+      ],
+      "id": "5045678",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/5045678/",
+      "orig_title": "",
+      "rating": 6.6,
+      "rating_count": 244316,
+      "title": "\u5927\u9c7c\u6d77\u68e0",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/5045678/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

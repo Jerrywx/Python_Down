@@ -1,0 +1,40 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 90,
+    "id": 476,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 6,
+    "payload": {
+      "background_color": "rgba(r,g,b,o) ",
+      "background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p1729.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img3.doubanio.com/view/activity_page/raw/public/p1884.jpg",
+      "subject_id": "25827935",
+      "text": "\u4f60\u662f\u6211\u6700\u597d\u7684\u670b\u53cb\uff0c\u6211\u6068\u8fc7\u4f60\uff0c\u4f46\u6211\u4e5f\u53ea\u6709\u4f60\u3002"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2378140502.jpg",
+      "directors": [
+        "\u66fe\u56fd\u7965 Derek Tsang"
+      ],
+      "id": "25827935",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/25827935/",
+      "orig_title": "",
+      "rating": 7.6,
+      "rating_count": 275046,
+      "title": "\u4e03\u6708\u4e0e\u5b89\u751f",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/25827935/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}
