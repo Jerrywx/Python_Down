@@ -1,0 +1,42 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 234,
+    "id": 59,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 1,
+    "payload": {
+      "background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p317.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img3.doubanio.com/view/activity_page/raw/public/p306.jpg",
+      "opacity": "0.2",
+      "other_text": "My angel, flung out of space.",
+      "subject_id": "10757577",
+      "text": "\u4f60\u50cf\u662f\u4ece\u5b87\u5b99\u4e2d\u98de\u6765\uff0c\u6211\u7684\u5929\u4f7f",
+      "text_label": "\u5e74\u5ea6\u53f0\u8bcd"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2312679154.jpg",
+      "directors": [
+        "\u6258\u5fb7\u00b7\u6d77\u56e0\u65af Todd Haynes"
+      ],
+      "id": "10757577",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/10757577/",
+      "orig_title": "Carol",
+      "rating": 8.2,
+      "rating_count": 131548,
+      "title": "\u5361\u7f57\u5c14",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/10757577/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

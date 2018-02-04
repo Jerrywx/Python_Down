@@ -1,0 +1,42 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 491,
+    "id": 42,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 1,
+    "payload": {
+      "background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p328.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p329.jpg",
+      "opacity": "0.1",
+      "other_text": "Witness me...Blood Bag! I live, I die, I live again!",
+      "subject_id": "3592854",
+      "text": "\u8840\u888b\uff0c\u89c1\u8bc1\u6211\u5427\uff01\u6211\u5c31\u662f\u90a3\u4e2a\u4ee5\u6700\u7480\u74a8\u593a\u76ee\u4e4b\u59ff\uff0c\u76f4\u5954\u82f1\u7075\u6bbf\u7684\u4eba",
+      "text_label": "\u5e74\u5ea6\u53f0\u8bcd"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2236181653.jpg",
+      "directors": [
+        "\u4e54\u6cbb\u00b7\u7c73\u52d2 George Miller"
+      ],
+      "id": "3592854",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/3592854/",
+      "orig_title": "Mad Max: Fury Road",
+      "rating": 8.5,
+      "rating_count": 209595,
+      "title": "\u75af\u72c2\u7684\u9ea6\u514b\u65af4\uff1a\u72c2\u66b4\u4e4b\u8def",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/3592854/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

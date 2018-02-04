@@ -1,0 +1,41 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 817,
+    "id": 24,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 1,
+    "payload": {
+      "background_img": "https://img3.doubanio.com/view/activity_page/raw/public/p276.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img3.doubanio.com/view/activity_page/raw/public/p324.jpg",
+      "opacity": "0.1",
+      "subject_id": "2303845",
+      "text": "\u6c5d\u4eca\u5251\u672f\u5df2\u6210\uff0c\u552f\u4e0d\u80fd\u65a9\u7edd\u4eba\u4f26\u4e4b\u60c5",
+      "text_label": "\u5e74\u5ea6\u53f0\u8bcd"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2262306528.jpg",
+      "directors": [
+        "\u4faf\u5b5d\u8d24 Hsiao-hsien Hou"
+      ],
+      "id": "2303845",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/2303845/",
+      "orig_title": "",
+      "rating": 7.2,
+      "rating_count": 131269,
+      "title": "\u523a\u5ba2\u8042\u9690\u5a18",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/2303845/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

@@ -856,10 +856,11 @@ class MovieComingSoon():
 class MovieList():
 
     # 年份
-    # year = 2017
-    year = 2016
+    year = 2017   #28
+    # year = 2016   #22
+    # year = 2015     #17
     tipNumb = 1
-    tipLimit = 22#28
+    tipLimit = 28
 
 
     # 影集 Url
@@ -900,7 +901,7 @@ class MovieList():
             "User_Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
         }
 
-        # 3. 拼接url 创建请求
+        # # 3. 拼接url 创建请求
         # # urlString = baseApi + top250
         # request = urllib.request.Request(urlString, headers=ua_heaeders)
         #
