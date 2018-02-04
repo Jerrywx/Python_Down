@@ -58,6 +58,10 @@ works = "/v2/movie/celebrity/{id}/works"
 # Example: GET /v2/movie/celebrity/1054395/works
 
 
+# ----------------------------------------------------------- 影集
+# 影集
+movieList = "https://movie.douban.com/ithil_j/activity/movie_annual{year}/widget/{tip}"
+# https://movie.douban.com/ithil_j/activity/movie_annual2017/widget/3
 
 
 

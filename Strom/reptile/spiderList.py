@@ -9,8 +9,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker, relationship
 import sys
 sys.path.append("../sqlManager")
-from movieApi import top250, baseApi, celebrity, movieInfo
-from dataManager import Movie, Country, MovieType, Celebrity
+from movieApi import top250, baseApi, celebrity, movieInfo, comingSoon, movieList
+from dataManager import Movie, Country, MovieType, Celebrity, MovieAlbum, Resource
 
 # ==========================================================
 # 抓取 Json 数据
@@ -627,9 +627,355 @@ class MovieDetial():
 
         session.commit()
 
+# 电影Top 250
+class MovieTop250():
+
+    # 抓取次数
+    timer = 0
+    # 每次抓取个数
+    limit = 20
+
+    # 获取每次 链接
+    def listUrl(self):
+
+        starNumb = self.timer * self.limit
+
+        numString = "?start={start}&count={count}"
+        urlString = baseApi + top250 + numString
+        urlString = urlString.replace("{start}", str(starNumb))
+        urlString = urlString.replace("{count}", str(self.limit))
+
+        return urlString
+
+    # 抓取开始
+    def spiderAction(self):
+
+        numb = (self.timer + 1) * self.limit
+
+        while numb <= 260:
+
+            print(self.listUrl())
+
+            self.spiderMovieList(self.listUrl(), str(self.timer))
+
+            self.timer = self.timer + 1
+            numb = (self.timer + 1) * self.limit
+
+    # 抓取数据、保存数据 操作
+    def spiderMovieList(self, urlString, name):
+        # 1. 处理 https
+        ssl._create_default_https_context = ssl._create_unverified_context
+
+        # 2. 自定义 User_Agent
+        ua_heaeders = {
+            "User_Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+        }
+
+        # 3. 拼接url 创建请求
+        # urlString = baseApi + top250
+        request = urllib.request.Request(urlString, headers=ua_heaeders)
+
+        # 4. 向指定url地址发送请求
+        response = urllib.request.urlopen(request)
+
+        # 5. read() 方法读取文件里的全部内容，返回字符串
+        html = response.read()
+        content = html.decode("utf-8")
+
+        # 6. 保存json
+        file = open("./resource/name.json", "w")
+        file.write(content)
+
+        # 1. 链接数据库
+        engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset=utf8', echo=False)
+        # 2. 创建数据库表
+        Base = declarative_base()
+
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        # 3. 读取文件中的 json
+        # file = open("./resource/list2.json", "r")
+        content = json.loads(content)
+
+        # 4. 遍历数据
+        for item in content["subjects"]:
+
+            # 检查电影是否存在
+            ret = session.query(Movie).filter_by(movie_douban_id=item['id']).first()
+            if ret:
+                print("---- 存在的电影:" + item['title'])
+            else:
+                print("--------------------:" + item['title'])
+                movie = Movie()
+                # 名称
+                movie.movie_name_cn = item['title']
+                # id
+                movie.movie_douban_id = item['id']
+                # 评分
+                movie.movie_douban_mark = item['rating']['average']
+                # 封面
+                movie.movie_cover = item['images']['large']
+                # 豆瓣链接
+                movie.movie_doubanUrl = item['alt']
+
+                # 类型
+                # types = item['genres']
+                # movie.movie_type = ','.join(types)
+
+                # 上映时间
+                movie.movie_release = item['year']
+
+                session.add(movie)
+
+        session.commit()
+
+# 即将上映电影
+class MovieComingSoon():
+    # 抓取次数
+    timer = 0
+    # 每次抓取个数
+    limit = 20
+
+    # 获取每次 链接
+    def listUrl(self):
+        starNumb = self.timer * self.limit
+
+        numString = "?start={start}&count={count}"
+        urlString = baseApi + comingSoon + numString
+        urlString = urlString.replace("{start}", str(starNumb))
+        urlString = urlString.replace("{count}", str(self.limit))
+
+        return urlString
+
+    # 抓取开始
+    def spiderAction(self):
+
+        numb = (self.timer + 1) * self.limit
+
+        while True:
+
+            print(self.listUrl())
+
+            goon = self.spiderMovieList(self.listUrl(), str(self.timer))
+
+            if goon == False:
+                break
+
+            self.timer = self.timer + 1
+            numb = (self.timer + 1) * self.limit
 
 
+    # 抓取数据、保存数据 操作
+    def spiderMovieList(self, urlString, name):
+        # 1. 处理 https
+        ssl._create_default_https_context = ssl._create_unverified_context
 
+        # 2. 自定义 User_Agent
+        ua_heaeders = {
+            "User_Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+        }
+
+        # 3. 拼接url 创建请求
+        # urlString = baseApi + top250
+        request = urllib.request.Request(urlString, headers=ua_heaeders)
+
+        # 4. 向指定url地址发送请求
+        response = urllib.request.urlopen(request)
+
+        # 5. read() 方法读取文件里的全部内容，返回字符串
+        html = response.read()
+        content = html.decode("utf-8")
+
+        # 6. 保存json
+        file = open("./resource/Soon"+name+".json", "w")
+        file.write(content)
+
+        # 1. 链接数据库
+        engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset=utf8', echo=False)
+        # 2. 创建数据库表
+        Base = declarative_base()
+
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        # 3. 读取文件中的 json
+        # file = open("./resource/list2.json", "r")
+        content = json.loads(content)
+
+        cont = content.get('subjects', None)
+
+        # 判断抓取数据是否成功
+        if content == None:
+            return False
+
+        # 4. 遍历数据
+        for item in cont:
+
+            # 检查电影是否存在
+            ret = session.query(Movie).filter_by(movie_douban_id=item['id']).first()
+            if ret:
+                print("---- 存在的电影:" + item['title'])
+            else:
+                print("--------------------:" + item['title'])
+                movie = Movie()
+                # 名称
+                movie.movie_name_cn = item['title']
+                # id
+                movie.movie_douban_id = item['id']
+                # 评分
+                movie.movie_douban_mark = item['rating']['average']
+                # 封面
+                movie.movie_cover = item['images']['large']
+                # 豆瓣链接
+                movie.movie_doubanUrl = item['alt']
+
+                # 类型
+                # types = item['genres']
+                # movie.movie_type = ','.join(types)
+
+                # 上映时间
+                movie.movie_release = item['year']
+
+                session.add(movie)
+
+        session.commit()
+
+        count = content.get('count', 0)
+        start = content.get('start', 0)
+        total = content.get('total', 0)
+
+        # 是否继续抓取
+        if total < start + count:
+            return False
+        return True
+
+
+# ========================================================== 影集
+# 抓取影集
+class MovieList():
+
+    # 年份
+    year = 2017
+    tipNumb = 1
+    tipLimit = 28
+
+
+    # 影集 Url
+    def moveListUrl(self):
+
+        urlSting = movieList
+        urlSting = urlSting.replace("{year}", str(self.year))
+        urlSting = urlSting.replace("{tip}", str(self.tipNumb))
+        return urlSting
+
+
+    # 抓取开始
+    def spiderAction(self):
+
+        # 遍历 url
+        for tip in range(self.tipNumb, self.tipLimit):
+
+            # 获取 url
+            urlString = self.moveListUrl()
+            # 获取名字
+            name = str(self.year) + "年" + str(self.tipNumb)
+            self.spiderMovieList(urlString, name)
+
+            tt = random.randint(1, 4)
+            print('sleep:', str(tt), urlString)
+            # time.sleep(tt)
+
+            self.tipNumb = self.tipNumb + 1
+
+
+    # 抓取数据、保存数据 操作
+    def spiderMovieList(self, urlString, name):
+        # 1. 处理 https
+        ssl._create_default_https_context = ssl._create_unverified_context
+
+        # 2. 自定义 User_Agent
+        ua_heaeders = {
+            "User_Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/63.0.3239.132 Safari/537.36"
+        }
+
+        # # 3. 拼接url 创建请求
+        # # urlString = baseApi + top250
+        # request = urllib.request.Request(urlString, headers=ua_heaeders)
+        #
+        # # 4. 向指定url地址发送请求
+        # response = urllib.request.urlopen(request)
+        #
+        # # 5. read() 方法读取文件里的全部内容，返回字符串
+        # html = response.read()
+        # content = html.decode("utf-8")
+        #
+        # # 6. 保存json
+        # file = open("./resource/"+name+".json", "w")
+        # file.write(content)
+
+        # 1. 链接数据库
+        engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset=utf8', echo=False)
+        # 2. 创建数据库表
+        Base = declarative_base()
+
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        # 3. 读取文件中的 json
+        file = open("./resource/"+name+".json", "r")
+        content = json.loads(file.read())
+        # content = json.loads(content)
+
+        content = content.get('res', None)
+        if content == None:
+            return False
+
+        # 获取 影集 内容
+        works = content['subjects']
+
+        # 不是影集
+        if len(works) == 0:
+            print(name + " 不是影集！！！！")
+            return False
+
+        # 解析影集
+        assemble = content['payload']
+        list_id = content['id']
+        list = session.query(MovieAlbum).filter_by(douban_id=list_id).first()
+
+        if list == None:
+            album = MovieAlbum()
+            album.douban_id = list_id
+            album.year = self.year
+            album.title = assemble['title']
+            album.cover_image = assemble['background_img']
+            album.cover_image_m = assemble.get('mobile_background_img', "")
+            album.description = assemble['description']
+            album.works_id = assemble['subject_ids']
+            session.add(album)
+
+
+        # 解析电影列表
+
+        for work in works:
+
+            movie = session.query(Movie).filter_by(movie_douban_id=work['id']).first()
+            # 电影不存在时 添加
+            if movie == None:
+                print("--------", work['title'])
+                m = Movie()
+                m.movie_name_cn     = work['title']
+                m.movie_douban_mark = work['rating']
+                m.movie_name_en     = work['orig_title']
+                m.movie_doubanUrl   = work['url']
+                m.movie_douban_id   = work['id']
+                m.movie_cover       = work['cover']
+                session.add(m)
+            else:
+                print("====== 存在的电影:", work['title'])
+
+        session.commit()
 
 def timess():
 
@@ -659,9 +1005,18 @@ timess()
 # storeMovieDetial()
 
 
+# top = MovieTop250()
+# top.spiderAction()
+
+# soon = MovieComingSoon()
+# soon.spiderAction()
+
+list = MovieList()
+list.spiderAction()
+
 #
-movie = MovieDetial()
-movie.spiderMpvie()
+# movie = MovieDetial()
+# movie.spiderMpvie()
 # print(movie.movieIdList())
 
 

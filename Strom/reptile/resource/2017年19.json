@@ -1,0 +1,39 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 51,
+    "id": 571,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 11,
+    "payload": {
+      "background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p2457.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p2617.jpg",
+      "subject_id": "25934014",
+      "text": "\u3000\u3000\u7b49\u4f60\u62ff\u5230\u8fd9\u4e2a\u89d2\u8272\uff0c\u4f60\u5fc5\u987b\u8981\u4ed8\u51fa\u4e00\u5207\uff0c\u5168\u529b\u4ee5\u8d74\uff0c\u8fd9\u662f\u4f60\u7684\u68a6\u60f3\u3002"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2425658570.jpg",
+      "directors": [
+        "\u8fbe\u7c73\u6069\u00b7\u67e5\u6cfd\u96f7 Damien Chazelle"
+      ],
+      "id": "25934014",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/25934014/",
+      "orig_title": "La La Land",
+      "rating": 8.3,
+      "rating_count": 358029,
+      "title": "\u7231\u4e50\u4e4b\u57ce",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/25934014/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

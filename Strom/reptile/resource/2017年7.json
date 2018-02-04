@@ -1,0 +1,24 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 23,
+    "id": 775,
+    "kind": 22,
+    "kind_cn": "\u699c\u5355\u7535\u5f71\u5728\u7ebf\u89c2\u770b",
+    "kind_str": "playlists",
+    "page_id": 11,
+    "payload": {
+      "bg_img_1": "https://img3.doubanio.com/view/activity_page/raw/public/p2993.jpg",
+      "bg_img_2": "https://img3.doubanio.com/view/activity_page/raw/public/p2994.jpg",
+      "bg_img_3": "https://img3.doubanio.com/view/activity_page/raw/public/p2995.jpg",
+      "has_barrage": "on",
+      "title": "\u699c\u5355\u7535\u5f71\u5728\u7ebf\u89c2\u770b"
+    },
+    "status": 0,
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

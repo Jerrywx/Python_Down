@@ -1,0 +1,39 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 237,
+    "id": 722,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 11,
+    "payload": {
+      "background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p2969.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img3.doubanio.com/view/activity_page/raw/public/p3035.jpg",
+      "subject_id": "26799731",
+      "text": "\u3000\u3000\u522b\u8ba9\u8fd9\u4e9b\u75db\u82e6\u6d88\u5931\uff0c\u4e5f\u522b\u4e27\u5931\u4f60\u611f\u53d7\u5230\u7684\u5feb\u4e50\u3002"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2505525050.jpg",
+      "directors": [
+        "\u5362\u5361\u00b7\u572d\u8fbe\u5c3c\u8bfa Luca Guadagnino"
+      ],
+      "id": "26799731",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/26799731/",
+      "orig_title": "Call Me by Your Name",
+      "rating": 8.9,
+      "rating_count": 111819,
+      "title": "\u8bf7\u4ee5\u4f60\u7684\u540d\u5b57\u547c\u5524\u6211",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/26799731/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

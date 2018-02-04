@@ -1,0 +1,39 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 45,
+    "id": 724,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 11,
+    "payload": {
+      "background_img": "https://img3.doubanio.com/view/activity_page/raw/public/p2636.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p2637.jpg",
+      "subject_id": "26773744",
+      "text": "\u3000\u3000\u73b0\u5728\u8f66\u6709\u4e86\uff0c\u6b4c\u4e5f\u6709\u4e86\uff0c\u4f60\u5012\u6ca1\u5174\u81f4\u4e86\u3002"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2502311890.jpg",
+      "directors": [
+        "\u5f20\u827e\u5609 Sylvia Chang"
+      ],
+      "id": "26773744",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/26773744/",
+      "orig_title": "",
+      "rating": 8.4,
+      "rating_count": 68400,
+      "title": "\u76f8\u7231\u76f8\u4eb2",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/26773744/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

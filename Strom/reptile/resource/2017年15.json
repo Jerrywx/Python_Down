@@ -1,0 +1,40 @@
+{
+  "r": 0,
+  "res": {
+    "TYPE": "ActivityPageWidget",
+    "comment_count": 97,
+    "id": 725,
+    "kind": 2,
+    "kind_cn": "\u53f0\u8bcd",
+    "kind_str": "dialogue",
+    "page_id": 11,
+    "payload": {
+      "background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p2648.jpg",
+      "has_barrage": "on",
+      "mobile_background_img": "https://img1.doubanio.com/view/activity_page/raw/public/p2757.jpg",
+      "subject_id": "20495023",
+      "text": "\u3000\u3000\u6b7b\u4ea1\u4e0d\u662f\u771f\u7684\u901d\u53bb\uff0c\u9057\u5fd8\u624d\u662f\u6c38\u6052\u7684\u6d88\u4ea1\u3002"
+    },
+    "status": 0,
+    "subject": {
+      "cover": "https://img1.doubanio.com/view/photo/s_ratio_poster/public/p2503997609.jpg",
+      "directors": [
+        "\u674e\u00b7\u6602\u514b\u91cc\u5947 Lee Unkrich",
+        "\u963f\u5fb7\u91cc\u5b89\u00b7\u83ab\u5229\u7eb3 Adrian Molina"
+      ],
+      "id": "20495023",
+      "is_released": true,
+      "m_url": "https://m.douban.com/movie/subject/20495023/",
+      "orig_title": "Coco",
+      "rating": 9.0,
+      "rating_count": 388009,
+      "title": "\u5bfb\u68a6\u73af\u6e38\u8bb0",
+      "type": "movie",
+      "url": "https://movie.douban.com/subject/20495023/"
+    },
+    "subjects": []
+  },
+  "status": {
+    "code": 200
+  }
+}

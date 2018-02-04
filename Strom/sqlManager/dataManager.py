@@ -2,7 +2,7 @@
 import sqlalchemy
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, MetaData, Boolean, Float, UniqueConstraint, Index, ForeignKey
+from sqlalchemy import Column, Integer, String, MetaData, Boolean, Float, UniqueConstraint, Index, ForeignKey, Interval
 from sqlalchemy.orm import sessionmaker, relationship
 
 
@@ -30,8 +30,6 @@ class ActorToMovie(Base):
     cel = relationship("Celebrity", backref='atm')
     # 关系
     relationship = Column(Integer) # 主演、导演、演员、编剧
-
-
 
 # 电影 和 类型
 class TypeToMovie(Base):
@@ -127,6 +125,17 @@ class VideoToCelebrity(Base):
     celebrity_id = Column(Integer, ForeignKey('celebrity.id'))
     # 视频
     video_id = Column(Integer, ForeignKey('video.id'))
+
+# =============================================== 影集 与 类型
+# 影集 与 电影类型
+class MovieListToType(Base):
+    __tablename__ = "list_to_type"
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影列表
+    list_id = Column(Integer, ForeignKey('moviealbum.id'))
+    # 电影类型
+    type_id = Column(Integer, ForeignKey('movietype.id'))
 
 
 # =============================================== 基础表
@@ -355,6 +364,41 @@ class Resource(Base):
 
 
     othre_link = Column(String(1024))
+
+# 影集
+class MovieAlbum(Base):
+    # 表名
+    __tablename__   = "moviealbum"
+
+    # 设置ID 类型 主键
+    id = Column(Integer, primary_key=True)
+
+    douban_id       = Column(Integer)
+
+    # 年份
+    year            = Column(Integer)
+    # 月份
+    moth            = Column(Integer)
+    # 时间
+    time            = Column(Interval)
+    # 时间
+    timeString      = Column(String(32))
+    # 标题
+    title           = Column(String(32))
+    # 封面图
+    cover_image     = Column(String(256))
+    # 封面图
+    cover_image_m   = Column(String(256))
+    # 描述
+    description     = Column(String(2048))
+    # 创建用户
+    user_id         = Column(Integer)
+    # 作品列表
+    works_id        = Column(String(1025))
+    # 评分
+    mark            = Column(Float)
+
+    movie_type = relationship("MovieType", secondary=MovieListToType.__table__, backref='list')
 
 
 # 创建表
