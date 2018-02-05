@@ -1,59 +1,54 @@
-
-import sys
-from enum import Enum
-import urllib
-from urllib.parse import quote, unquote, urlencode
-# from urllib import quote
-
-# 导入数据库管理部分
-sys.path.append("../sqlManager")
-# import dataManager
-from dataManager import *
-
-
-class MovieClass(Enum):
-    Hot         = "热门"
-    New         = "最新"
-    Classic     = "经典"
-    Play        = "可播放"
-    Top         = "豆瓣高分"
-    Dark        = "冷门佳片"
-    Chinese     = "华语"
-    America     = "欧美"
-    Korean      = "韩国"
-    Japan       = "日本"
-    Action      = "动作"
-    Comedy      = "喜剧"
-    Love        = "爱情"
-    Science     = "科幻"
-    Suspense    = "悬疑"
-    Terrify     = "恐怖"
-    Cure        = "治愈"
-
-# 程序
-def main():
-    print("This is Main")
-
-    # for name in MovieClass:
-    #     print(name)
-
-    for name, member in MovieClass.__members__.items():
-        print(name, '\t=>\t', member.value)
-
-    # print(MovieClass.Sun)
-    # print(MovieClass.Sat)
-
-    # type = ["热门", "最新", "经典", "可播放", "豆瓣高分",
-    #         "冷门佳片", "华语", "欧美", "韩国", "日本",
-    #         "动作", "喜剧", "爱情", "科幻", "悬疑", "恐怖", "治愈"]
-    #
-    # for key in type:
-    #     print(key + ":" + quote(key))
-
-    # dataManager.createForm()
-    # createForm()
+# 1、Tornado 基本使用
+# 2、html 文件映射
+# 3、模板路径配置 (html)
+# 4、静态文件配置 (js、css、图片等)
+# 5、添加post 接收提交参数
+# 6、向html传递参数
+# 7、使用模板语言
+# 8、模板语言
+#       {{}}
+#       {% if %} {% endif %}
+#       自定义模板语言'
+#              1. ui_methods
+#              2. ui_modules
+# 9、html 调用 Python 语言
+# 10、static_url  MD5
+# 运行 tornado: python 01-hello.py --port=8000
 
 
+# 导入了一些Tornado模块
+import tornado.httpserver
+import tornado.ioloop
+import tornado.options
+import tornado.web
+from StormOp import StormOp
+from Spider import Spider
 
-if __name__ == '__main__':
-    main()
+# Tornado包括了一个有用的模块（tornado.options）来从命令行中读取设置。
+from tornado.options import define, options
+
+define("port", default=8000, help="run on the given port", type=int)
+
+# 模板路径配置、静态文件配置
+# settings = {
+#     "template_path" : "template",
+#     "static_path" : "static",
+#     # 'ui_methods': mt,
+#     # 'ui_modules' : md,
+# }
+
+# 路由映射、模板路径配置
+application = tornado.web.Application([
+    (r"/op", StormOp),
+    (r"/spider", Spider),
+])
+
+# 运行Tornado
+if __name__ == "__main__":
+    application.listen(8000)
+    tornado.ioloop.IOLoop.instance().start()
+
+
+# if __name__ == "__main__":
+#     application.listen(8000)
+#     tornado.ioloop.IOLoop.instance().start()
