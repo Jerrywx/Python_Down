@@ -76,47 +76,10 @@
 
 
         <div class="content_right">
-            <div class="panel panel-primary">内容</div>
 
-            <table border="1" class="movieList">
-                <tr>
-                    <th>ID</th>
-                    <th>名字</th>
-                    <th>原名</th>
-                    <th>评分</th>
-                    <th>豆瓣Id</th>
-                </tr>
+                {% block body %}
 
-                {% for item in movieList %}
-                    <tr>
-                        <td height="30px">{{item.id}}</td>
-                        <td><a href="moviedetial?movieid={{item.id}}">{{item.movie_name_cn}}</a></td>
-                        <td>{{item.movie_name_en}}</td>
-                        <td>{{item.movie_douban_mark}}</td>
-                        <td>{{item.movie_douban_id}}</td>
-                    </tr>
-                {% end %}
-
-            </table>
-
-            <!-- 分页 -->
-
-            <div>
-
-                <ul class="page">
-
-                    {% for num in range(1, count + 1) %}
-                        <li>
-                            <form method="get" action="op">
-                                <input type="text" name="page" style="display:none" value={{num}}>
-                                <input type="submit" value="{{num}}">
-                            </form>
-
-                        </li>
-                    {%end%}
-                </ul>
-
-            </div>
+                {% endblock %}
 
 
         </div>

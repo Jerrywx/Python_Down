@@ -34,9 +34,6 @@ class StormOp(tornado.web.RequestHandler):
         movieList = self.fetchMovies()
         self.page_numb = self.page_numb + 1
 
-
-
-
         session = self.sqlSession()
         count = session.query(Movie).count()
 
@@ -81,7 +78,32 @@ class StormOp(tornado.web.RequestHandler):
 # 电影详情
 class MovieDetial(tornado.web.RequestHandler):
 
+    # 获取数据库句柄
+    def sqlSession(self):
+        # 1. 链接数据库
+        engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset=utf8', echo=False)
+        # 2. 创建数据库表
+        Base = declarative_base()
+
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        return session
+
+
     def get(self, *args, **kwargs):
 
-        print("================== BBBBBBBBBBBBBB")
-        self.render('moviedetial.html')
+        movieId = self.get_argument("movieid")
+
+        movie = self.movieDerial(movieId)
+
+        self.render('moviedetial.html', movie=movie)
+
+
+    def movieDerial(self, movieId):
+
+        session = self.sqlSession()
+
+        movie = session.query(Movie).filter_by(id=movieId).first()
+
+        return movie
