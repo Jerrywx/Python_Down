@@ -27,7 +27,6 @@
             margin: auto auto;
         }
 
-
         .nav_left {
             width: 200px;
             float: left;
@@ -37,6 +36,19 @@
             float: left;
             margin-left: 20px;
             width: 1000px;
+        }
+
+        .movieList {
+            width: 1000px;
+            background-color: white;
+        }
+
+        .page li {
+            float: left;
+            display: block;
+            width: 50px;
+            height: 20px;
+            font-size: 25px;
         }
 
     </style>
@@ -53,9 +65,9 @@
         <div class="nav_left">
             <div class="list-group">
                 <a href="#" class="list-group-item active">
-                    Cras justo odio
+                    列表
                 </a>
-                <a href="#" class="list-group-item">Dapibus ac facilisis in</a>
+                <a href="#" class="list-group-item">全部</a>
                 <a href="#" class="list-group-item">Morbi leo risus</a>
                 <a href="#" class="list-group-item">Porta ac consectetur ac</a>
                 <a href="#" class="list-group-item">Vestibulum at eros</a>
@@ -65,9 +77,49 @@
 
         <div class="content_right">
             <div class="panel panel-primary">内容</div>
+
+            <table border="1" class="movieList">
+                <tr>
+                    <th>ID</th>
+                    <th>名字</th>
+                    <th>原名</th>
+                    <th>评分</th>
+                    <th>豆瓣Id</th>
+                </tr>
+
+                {% for item in movieList %}
+                    <tr>
+                        <td height="30px">{{item.id}}</td>
+                        <td>{{item.movie_name_cn}}</td>
+                        <td>{{item.movie_name_en}}</td>
+                        <td>{{item.movie_douban_mark}}</td>
+                        <td>{{item.movie_douban_id}}</td>
+                    </tr>
+                {% end %}
+
+            </table>
+
+            <!-- 分页 -->
+
+            <div>
+
+                <ul class="page">
+
+                    {% for num in range(1, count + 1) %}
+                        <li>
+                            <form method="get" action="op">
+                                <input type="text" name="page" style="display:none" value={{num}}>
+                                <input type="submit" value="{{num}}">
+                            </form>
+
+                        </li>
+                    {%end%}
+                </ul>
+
+            </div>
+
+
         </div>
-
-
     </div>
 
 

@@ -856,11 +856,11 @@ class MovieComingSoon():
 class MovieList():
 
     # 年份
-    year = 2017   #28
-    # year = 2016   #22
+    # year = 2017   #28
+    year = 2016   #22
     # year = 2015     #17
     tipNumb = 1
-    tipLimit = 28
+    tipLimit = 22
 
 
     # 影集 Url
@@ -870,7 +870,6 @@ class MovieList():
         urlSting = urlSting.replace("{year}", str(self.year))
         urlSting = urlSting.replace("{tip}", str(self.tipNumb))
         return urlSting
-
 
     # 抓取开始
     def spiderAction(self):
@@ -889,7 +888,6 @@ class MovieList():
             # time.sleep(tt)
 
             self.tipNumb = self.tipNumb + 1
-
 
     # 抓取数据、保存数据 操作
     def spiderMovieList(self, urlString, name):
@@ -1020,52 +1018,3 @@ list.spiderAction()
 # movie = MovieDetial()
 # movie.spiderMpvie()
 # print(movie.movieIdList())
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
