@@ -21,7 +21,7 @@ import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
-from StormOp import StormOp
+from StormOp import StormOp, MovieDetial
 from Spider import Spider
 
 # Tornado包括了一个有用的模块（tornado.options）来从命令行中读取设置。
@@ -41,6 +41,7 @@ define("port", default=8000, help="run on the given port", type=int)
 application = tornado.web.Application([
     (r"/op", StormOp),
     (r"/spider", Spider),
+    (r"/moviedetial", MovieDetial)
 ])
 
 # 运行Tornado

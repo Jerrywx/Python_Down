@@ -90,7 +90,7 @@
                 {% for item in movieList %}
                     <tr>
                         <td height="30px">{{item.id}}</td>
-                        <td>{{item.movie_name_cn}}</td>
+                        <td><a href="moviedetial?movieid={{item.id}}">{{item.movie_name_cn}}</a></td>
                         <td>{{item.movie_name_en}}</td>
                         <td>{{item.movie_douban_mark}}</td>
                         <td>{{item.movie_douban_id}}</td>

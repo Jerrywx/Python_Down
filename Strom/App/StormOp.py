@@ -74,8 +74,14 @@ class StormOp(tornado.web.RequestHandler):
 
         session = self.sqlSession()
         # ll = session.query(Movie).count()
-
         list = session.query(Movie).limit(self.page_size).offset(self.page_size * self.page_numb)
-
-
         return list
+
+
+# 电影详情
+class MovieDetial(tornado.web.RequestHandler):
+
+    def get(self, *args, **kwargs):
+
+        print("================== BBBBBBBBBBBBBB")
+        self.render('moviedetial.html')
