@@ -857,10 +857,10 @@ class MovieList():
 
     # 年份
     # year = 2017   #28
-    year = 2016   #22
-    # year = 2015     #17
+    # year = 2016   #22
+    year = 2015     #17
     tipNumb = 1
-    tipLimit = 22
+    tipLimit = 17
 
 
     # 影集 Url
