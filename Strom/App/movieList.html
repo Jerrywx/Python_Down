@@ -3,6 +3,45 @@
 {% block body %}
 
 <!-- 影集 -->
-<h4>影集</h4>
+<table border="1" class="movieList">
+    <tr>
+        <th>ID</th>
+        <th>名字</th>
+        <th>原名</th>
+        <th>评分</th>
+        <th>豆瓣Id</th>
+    </tr>
+
+    {% for item in movieAlbum %}
+        <tr>
+            <td height="30px">{{item.id}}</td>
+            <td><a href="moviedetial?movieid={{item.id}}">{{item.title}}</a></td>
+            <td>{{item.year}}</td>
+            <td>{{item.description}}</td>
+            <td>{{item.douban_id}}</td>
+        </tr>
+    {% end %}
+
+</table>
+
+<!-- 分页 -->
+
+<div class="page_control">
+
+    <!--<ul class="page">-->
+
+        {% for num in range(1, count + 1) %}
+            <li>
+                <form method="get" action="movielist">
+                    <input type="text" name="page" style="display:none" value={{num}}>
+                    <input type="submit" value="{{num}}">
+                </form>
+            </li>
+        {%end%}
+    <!--</ul>-->
+
+</div>
+
+
 
 {% end %}

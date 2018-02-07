@@ -18,8 +18,23 @@ sys.path.append("../sqlManager")
 from dataManager import Movie, Country, MovieType, Celebrity, MovieAlbum, Resource
 import math
 
+# 数据库管理类
+class Session():
 
-# 请求处理函数类
+    @classmethod  # 类方法
+    def session(cls):
+        # 1. 链接数据库
+        engine = create_engine('mysql+pymysql://root:123456@127.0.0.1:3306/storm?charset=utf8', echo=False)
+        # 2. 创建数据库表
+        Base = declarative_base()
+
+        Session = sessionmaker(bind=engine)
+        session = Session()
+
+        return session
+
+
+# 电影列表
 class StormOp(tornado.web.RequestHandler):
     page_size = 20
     page_numb = 1
@@ -70,7 +85,6 @@ class StormOp(tornado.web.RequestHandler):
     def fetchMovies(self):
 
         session = self.sqlSession()
-        # ll = session.query(Movie).count()
         list = session.query(Movie).limit(self.page_size).offset(self.page_size * self.page_numb)
         return list
 
@@ -112,8 +126,24 @@ class MovieDetial(tornado.web.RequestHandler):
 # 影集
 class MovieList(tornado.web.RequestHandler):
 
+    page_size = 15
+    page_numb = 1
+
     def get(self, *args, **kwargs):
-        self.render('movieList.html')
+
+        session = Session.session()
+
+        number = self.get_argument("page", 1)
+        self.page_numb = int(number) - 1
+
+        count = session.query(MovieAlbum).count()
+        movieList = session.query(MovieAlbum).all()
+
+        list = session.query(MovieAlbum).limit(self.page_size).offset(self.page_size * self.page_numb)
+
+        numb = math.ceil(count / self.page_size)
+
+        self.render('movieList.html', movieAlbum=list, count=numb)
 
 
 # Top250
