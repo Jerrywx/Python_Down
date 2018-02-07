@@ -21,7 +21,6 @@
     <style type="text/css">
 
         .content {
-            background-color: #3c763d;
             width: 1220px;
             height: 800px;
             margin: auto auto;
@@ -43,13 +42,20 @@
             background-color: white;
         }
 
-        .page li {
+        .page_control li {
             float: left;
-            display: block;
-            width: 50px;
-            height: 20px;
-            font-size: 25px;
+            /*display: block;*/
+            /*font-size: 25px;*/
+            padding-right: 15px;
+            list-style: none;
+            margin-top: 30px;
         }
+
+        /*.page_control {*/
+            /*background-color: red;*/
+            /*width: 1000px;*/
+            /*height: 80px;*/
+        /*}*/
 
     </style>
 
@@ -67,21 +73,17 @@
                 <a href="#" class="list-group-item active">
                     列表
                 </a>
-                <a href="#" class="list-group-item">全部</a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
+                <a href="op" class="list-group-item">全部</a>
+                <a href="movielist" class="list-group-item">影集</a>
+                <a href="top250" class="list-group-item">Top 250</a>
+                <a href="online" class="list-group-item">正在热映</a>
             </div>
         </div>
 
 
         <div class="content_right">
-
                 {% block body %}
-
-                {% endblock %}
-
-
+                {% end %}
         </div>
     </div>
 

@@ -107,3 +107,24 @@ class MovieDetial(tornado.web.RequestHandler):
         movie = session.query(Movie).filter_by(id=movieId).first()
 
         return movie
+
+
+# 影集
+class MovieList(tornado.web.RequestHandler):
+
+    def get(self, *args, **kwargs):
+        self.render('movieList.html')
+
+
+# Top250
+class Top250(tornado.web.RequestHandler):
+
+    def get(self, *args, **kwargs):
+        self.render('top250.html')
+
+
+# 正在热映
+class Online(tornado.web.RequestHandler):
+
+    def get(self, *args, **kwargs):
+        self.render('online.html')

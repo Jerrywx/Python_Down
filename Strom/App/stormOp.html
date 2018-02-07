@@ -1,126 +1,49 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>StormOp</title>
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+{% extends "base.html" %}
 
-    <!-- 新 Bootstrap 核心 CSS 文件 -->
-    <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+{% block body %}
 
-    <!-- 可选的Bootstrap主题文件（一般不使用） -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"></script>
-
-    <!-- jQuery文件。务必在bootstrap.min.js 之前引入 -->
-    <script src="https://cdn.bootcss.com/jquery/2.1.1/jquery.min.js"></script>
-
-    <!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
-    <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-    <style type="text/css">
-
-        .content {
-            background-color: #3c763d;
-            width: 1220px;
-            height: 800px;
-            margin: auto auto;
-        }
-
-        .nav_left {
-            width: 200px;
-            float: left;
-        }
-
-        .content_right {
-            float: left;
-            margin-left: 20px;
-            width: 1000px;
-        }
-
-        .movieList {
-            width: 1000px;
-            background-color: white;
-        }
-
-        .page li {
-            float: left;
-            display: block;
-            width: 50px;
-            height: 20px;
-            font-size: 25px;
-        }
-
-    </style>
-
-</head>
-<body>
-
-    <nav class="navbar navbar-inverse">
-    </nav>
+<!--<div class="panel panel-primary">内容</div>-->
 
 
-    <div class="content">
+<table border="1" class="movieList">
+    <tr>
+        <th>ID</th>
+        <th>名字</th>
+        <th>原名</th>
+        <th>评分</th>
+        <th>豆瓣Id</th>
+    </tr>
 
-        <div class="nav_left">
-            <div class="list-group">
-                <a href="#" class="list-group-item active">
-                    列表
-                </a>
-                <a href="#" class="list-group-item">全部</a>
-                <a href="#" class="list-group-item">Morbi leo risus</a>
-                <a href="#" class="list-group-item">Porta ac consectetur ac</a>
-                <a href="#" class="list-group-item">Vestibulum at eros</a>
-            </div>
-        </div>
+    {% for item in movieList %}
+        <tr>
+            <td height="30px">{{item.id}}</td>
+            <td><a href="moviedetial?movieid={{item.id}}">{{item.movie_name_cn}}</a></td>
+            <td>{{item.movie_name_en}}</td>
+            <td>{{item.movie_douban_mark}}</td>
+            <td>{{item.movie_douban_id}}</td>
+        </tr>
+    {% end %}
 
+</table>
 
-        <div class="content_right">
-            <div class="panel panel-primary">内容</div>
+<!-- 分页 -->
 
-            <table border="1" class="movieList">
-                <tr>
-                    <th>ID</th>
-                    <th>名字</th>
-                    <th>原名</th>
-                    <th>评分</th>
-                    <th>豆瓣Id</th>
-                </tr>
+<div class="page_control">
 
-                {% for item in movieList %}
-                    <tr>
-                        <td height="30px">{{item.id}}</td>
-                        <td><a href="moviedetial?movieid={{item.id}}">{{item.movie_name_cn}}</a></td>
-                        <td>{{item.movie_name_en}}</td>
-                        <td>{{item.movie_douban_mark}}</td>
-                        <td>{{item.movie_douban_id}}</td>
-                    </tr>
-                {% end %}
+    <!--<ul class="page">-->
 
-            </table>
+        {% for num in range(1, count + 1) %}
+            <li>
+                <form method="get" action="op">
+                    <input type="text" name="page" style="display:none" value={{num}}>
+                    <input type="submit" value="{{num}}">
+                </form>
+            </li>
+        {%end%}
+    <!--</ul>-->
 
-            <!-- 分页 -->
-
-            <div>
-
-                <ul class="page">
-
-                    {% for num in range(1, count + 1) %}
-                        <li>
-                            <form method="get" action="op">
-                                <input type="text" name="page" style="display:none" value={{num}}>
-                                <input type="submit" value="{{num}}">
-                            </form>
-
-                        </li>
-                    {%end%}
-                </ul>
-
-            </div>
+</div>
 
 
-        </div>
-    </div>
-
-</body>
-</html>
+{% end %}
