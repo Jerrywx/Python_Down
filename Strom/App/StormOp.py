@@ -60,7 +60,6 @@ class StormOp(tornado.web.RequestHandler):
         # self.render('StormOp.html')
         self.render('StormOp.html', movieList=movieList, count=numb)
 
-
     def post(self, *args, **kwargs):
         name = self.get_argument("name")
 
