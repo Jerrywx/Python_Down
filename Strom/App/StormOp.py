@@ -43,6 +43,14 @@ class StormOp(tornado.web.RequestHandler):
         # 返回内容
 
 
+        # 判断是不是搜索
+        id = self.get_argument("content", None)
+        if id != None:
+            list = self.search(id)
+            self.render('StormOp.html', movieList=list, count=len(list))
+            return
+
+
         number = self.get_argument("page", 1)
         self.page_numb = int(number) - 1
 
@@ -87,6 +95,13 @@ class StormOp(tornado.web.RequestHandler):
         list = session.query(Movie).limit(self.page_size).offset(self.page_size * self.page_numb)
         return list
 
+    # 搜索
+    def search(self, movieId):
+        session = Session.session();
+        movie = session.query(Movie).filter_by(id=movieId).all()
+        return movie
+
+
 
 # 电影详情
 class MovieDetial(tornado.web.RequestHandler):
@@ -130,6 +145,12 @@ class MovieList(tornado.web.RequestHandler):
 
     def get(self, *args, **kwargs):
 
+        albumId = self.get_argument("content", None)
+
+        if albumId != None:
+            albums = self.getAlbum(albumId)
+            self.render('movieList.html', movieAlbum=albums, count=len(albums))
+
         session = Session.session()
 
         number = self.get_argument("page", 1)
@@ -145,6 +166,11 @@ class MovieList(tornado.web.RequestHandler):
         self.render('movieList.html', movieAlbum=list, count=numb)
 
 
+    def getAlbum(self, albumId):
+
+        session = Session.session()
+        return session.query(MovieAlbum).filter_by(id=albumId).all()
+
 # Top250
 class Top250(tornado.web.RequestHandler):
 
@@ -157,3 +183,42 @@ class Online(tornado.web.RequestHandler):
 
     def get(self, *args, **kwargs):
         self.render('online.html')
+
+
+# 影集详情
+class AlbumDetial(tornado.web.RequestHandler):
+
+    def get(self, *args, **kwargs):
+
+        # 获取参数
+        albumId = self.get_argument("albumId", 1)
+        # 获取影集详细信息
+        album = self.getAlbumDetial(albumId)
+        # 获取电影列表
+        movieList = self.getAlbumList(album.works_id)
+
+        self.render('albumDetial.html', album=album, movieList=movieList)
+
+    # 获取电脑详细信息
+    def getAlbumDetial(self, albumId):
+
+        # 数据库 session
+        session = Session.session()
+
+        album = session.query(MovieAlbum).filter_by(id=albumId).first()
+
+        return album
+
+    # 获取电影列表
+    def getAlbumList(self, listId):
+
+        arrayOfId = listId.split(",")
+
+
+        # query.filter(User.name.in_(['ed', 'wendy', 'jack']))
+        session = Session.session()
+        list = session.query(Movie).filter(Movie.movie_douban_id.in_(arrayOfId)).all()
+
+        return list
+
+

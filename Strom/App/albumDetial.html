@@ -1,0 +1,41 @@
+{% extends "base.html" %}
+
+
+
+{% block body %}
+
+<h3>电影列表: </h3>
+
+<h4>{{album.title}}</h4>
+
+<h4>年份：{{album.year}}</h4>
+<h4>描述:</h4>
+<p>{{album.description}}</p>
+
+<img src="{{album.cover_image}}" width="800" >
+
+<h4>电影列表:</h4>
+<table border="1" class="movieList">
+    <tr>
+        <th>ID</th>
+        <th>名字</th>
+        <th>原名</th>
+        <th>评分</th>
+        <th>豆瓣Id</th>
+    </tr>
+
+    {% for item in movieList %}
+        <tr>
+            <td height="30px">{{item.id}}</td>
+            <td><a href="moviedetial?movieid={{item.id}}">{{item.movie_name_cn}}</a></td>
+            <td>{{item.movie_name_en}}</td>
+            <td>{{item.movie_douban_mark}}</td>
+            <td>{{item.movie_douban_id}}</td>
+        </tr>
+    {% end %}
+
+</table>
+
+<!--movieList-->
+
+{% end %}

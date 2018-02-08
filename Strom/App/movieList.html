@@ -1,5 +1,13 @@
 {% extends "base.html" %}
 
+
+{% block search %}
+<form action="movielist" method="get" class="search_input">
+    <input type="text" name="content">
+    <input type="submit" value="搜索">
+</form>
+{% end %}
+
 {% block body %}
 
 <!-- 影集 -->
@@ -15,7 +23,7 @@
     {% for item in movieAlbum %}
         <tr>
             <td height="30px">{{item.id}}</td>
-            <td><a href="moviedetial?movieid={{item.id}}">{{item.title}}</a></td>
+            <td><a href="album?albumId={{item.id}}">{{item.title}}</a></td>
             <td>{{item.year}}</td>
             <td>{{item.description}}</td>
             <td>{{item.douban_id}}</td>
@@ -28,17 +36,16 @@
 
 <div class="page_control">
 
-    <!--<ul class="page">-->
 
-        {% for num in range(1, count + 1) %}
-            <li>
-                <form method="get" action="movielist">
-                    <input type="text" name="page" style="display:none" value={{num}}>
-                    <input type="submit" value="{{num}}">
-                </form>
-            </li>
-        {%end%}
-    <!--</ul>-->
+    {% for num in range(1, count + 1) %}
+        <li>
+            <form method="get" action="movielist">
+                <input type="text" name="page" style="display:none" value={{num}}>
+                <input type="submit" value="{{num}}">
+            </form>
+        </li>
+    {%end%}
+
 
 </div>
 

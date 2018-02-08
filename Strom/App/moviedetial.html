@@ -4,5 +4,32 @@
 
 <!-- 电影详情 -->
 <h4>{{movie.movie_name_cn}}</h4>
+<!--https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2508618114.webp-->
+<img src="{{movie.movie_cover}}" width="200" alt="封面">
+
+<h4>原名: {{movie.movie_name_en}}</h4>
+<h4>时长: {{movie.movie_length}}</h4>
+<h4>简介: {{movie.movie_summary}}</h4>
+<a href="{{movie.movie_doubanUrl}}" target="_blank">豆瓣链接</a>
+
 
 {% end %}
+
+
+
+
+ id                 | int(11)       | NO   | PRI | NULL    | auto_increment |
+| complete           | tinyint(1)    | YES  |     | NULL    |                |
+| movie_name_cn      | varchar(128)  | YES  |     | NULL    |                |
+| movie_name_en      | varchar(128)  | YES  |     | NULL    |                |
+| movie_name_ot      | varchar(128)  | YES  |     | NULL    |                |
+| movie_cover        | varchar(256)  | YES  |     | NULL    |                |
+| movie_summary      | varchar(2048) | YES  |     | NULL    |                |
+| movie_length       | int(11)       | YES  |     | NULL    |                |
+| movie_release      | varchar(128)  | YES  |     | NULL    |                |
+| movie_language     | varchar(128)  | YES  |     | NULL    |                |
+| movie_douban_mark  | varchar(32)   | YES  |     | NULL    |                |
+| movie_doubanUrl    | varchar(256)  | YES  |     | NULL    |                |
+| movie_douban_id    | int(11)       | YES  | MUL | NULL    |                |
+| movie_tomato_mark1 | varchar(32)   | YES  |     | NULL    |                |
+| movie_tomato_mark2

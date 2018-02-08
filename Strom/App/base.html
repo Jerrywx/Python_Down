@@ -51,6 +51,18 @@
             margin-top: 30px;
         }
 
+
+        .searchBar {
+            width: 1000px;
+            height: 30px;
+            background-color: #9d9d9d;
+        }
+
+
+        .search_input input {
+            float: left;
+        }
+
     </style>
 
 </head>
@@ -76,6 +88,21 @@
 
 
         <div class="content_right">
+
+                <div class="searchBar">
+
+                    <!--<form action="search" method="get" class="search_input">-->
+                        <!--<input type="text" name="content"></form>-->
+                        <!--<input type="submit" value="搜索">-->
+                    <!--</form>-->
+
+
+                    {% block search %}
+
+                    {% end %}
+
+                </div>
+
                 {% block body %}
                 {% end %}
         </div>

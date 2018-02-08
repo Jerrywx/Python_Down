@@ -1,6 +1,15 @@
 
 {% extends "base.html" %}
 
+{% block search %}
+
+<form action="op" method="get" class="search_input">
+    <input type="text" name="content">
+    <input type="submit" value="搜索">
+</form>
+
+{% end %}
+
 {% block body %}
 
 <!--<div class="panel panel-primary">内容</div>-->
