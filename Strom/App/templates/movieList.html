@@ -13,20 +13,20 @@
 <!-- 影集 -->
 <table border="1" class="movieList">
     <tr>
-        <th>ID</th>
-        <th>名字</th>
-        <th>原名</th>
-        <th>评分</th>
-        <th>豆瓣Id</th>
+        <th width="20px">ID</th>
+        <th width="100px">名字</th>
+        <th width="20px">原名</th>
+        <th >评分</th>
+        <th width="30px">豆瓣Id</th>
     </tr>
 
     {% for item in movieAlbum %}
         <tr>
-            <td height="30px">{{item.id}}</td>
+            <td height="30px" style="text-align:center">{{item.id}}</td>
             <td><a href="album?albumId={{item.id}}">{{item.title}}</a></td>
             <td>{{item.year}}</td>
             <td>{{item.description}}</td>
-            <td>{{item.douban_id}}</td>
+            <td style="text-align:center">{{item.douban_id}}</td>
         </tr>
     {% end %}
 

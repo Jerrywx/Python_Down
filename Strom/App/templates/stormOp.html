@@ -17,7 +17,7 @@
 
 <table border="1" class="movieList">
     <tr>
-        <th>ID</th>
+        <th width="50px">ID</th>
         <th>名字</th>
         <th>原名</th>
         <th>评分</th>
@@ -26,11 +26,11 @@
 
     {% for item in movieList %}
         <tr>
-            <td height="30px">{{item.id}}</td>
+            <td height="30px" style="text-align:center">{{item.id}}</td>
             <td><a href="moviedetial?movieid={{item.id}}">{{item.movie_name_cn}}</a></td>
             <td>{{item.movie_name_en}}</td>
-            <td>{{item.movie_douban_mark}}</td>
-            <td>{{item.movie_douban_id}}</td>
+            <td style="text-align:center">{{item.movie_douban_mark}}</td>
+            <td style="text-align:center">{{item.movie_douban_id}}</td>
         </tr>
     {% end %}
 
