@@ -20,6 +20,7 @@
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
+import os
 import tornado.web
 from StormOp import StormOp, MovieDetial, MovieList, Top250, Online, AlbumDetial
 from Spider import Spider
@@ -30,12 +31,10 @@ from tornado.options import define, options
 define("port", default=8000, help="run on the given port", type=int)
 
 # 模板路径配置、静态文件配置
-# settings = {
-#     "template_path" : "template",
-#     "static_path" : "static",
-#     # 'ui_methods': mt,
-#     # 'ui_modules' : md,
-# }
+settings = {
+    "template_path" : "templates",
+    "static_path" : "static",
+}
 
 # 路由映射、模板路径配置
 application = tornado.web.Application([
@@ -45,8 +44,8 @@ application = tornado.web.Application([
     (r"/movielist", MovieList),
     (r"/top250", Top250),
     (r"/online", Online),
-    (r"/album", AlbumDetial)
-])
+    (r"/album", AlbumDetial)],
+    **settings )
 
 # 运行Tornado
 if __name__ == "__main__":

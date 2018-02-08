@@ -1,0 +1,453 @@
+@charset "UTF-8";
+
+/*css 初始化 */
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img { margin:0; padding:0; }
+fieldset, img,input,button { border:none; padding:0;margin:0;outline-style:none; }
+ul, ol { list-style:none; }
+input { padding-top:0; padding-bottom:0; font-family: "SimSun","宋体";}
+select, input { vertical-align:middle;}
+select, input, textarea { font-size:12px; margin:0; }
+textarea { resize:none; } /*防止拖动*/
+img {border:0;	vertical-align:middle; }  /*  去掉图片低测默认的3像素空白缝隙*/
+table { border-collapse:collapse; }
+body {
+    font:12px/150% Arial,Verdana,"\5b8b\4f53";
+    color:#666;
+    background:#fff
+}
+.clearfix:before,.clearfix:after {
+    content:"";
+    display:table;
+}
+.clearfix:after{clear:both;}
+.clearfix{
+    *zoom:1;/*IE/7/6*/
+}
+a {color:#666; text-decoration:none; }
+a:hover{color:#C81623;}
+h1,h2,h3,h4,h5,h6 {text-decoration:none;font-weight:normal;font-size:100%;}
+s,i,em{font-style:normal;text-decoration:none;}
+.col-red{color: #EC2539!important;}
+
+/*公共类*/
+.w {  /*版心 提取 */
+    width: 1210px;margin:0 auto;
+}
+.fl {
+    float:left
+}
+.fr {
+    float:right
+}
+.al {
+    text-align:left
+}
+.ac {
+    text-align:center
+}
+.ar {
+    text-align:right
+}
+.hide {
+    display:none
+}
+
+/*!*头部导航开始*!*/
+/*.shortcut {*/
+    /*height: 30px;*/
+    /*line-height: 30px;*/
+    /*background-color: #f1f1f1;*/
+/*}*/
+/*.dt,*/
+/*.shortcut .fore*/
+/*{*/
+    /*padding:0 20px 0 10px;*/
+    /*position: relative;*/
+/*}*/
+/*.dt i,*/
+/*.fore i*/
+/*{*/
+    /*font: 400 15px/15px "宋体";*/
+    /*position: absolute;*/
+    /*top:13px;*/
+    /*right:3px;*/
+    /*height: 7px;*/
+    /*overflow: hidden;*/
+    /*width: 15px;*/
+/*}*/
+/*.dt s,*/
+/*.fore s{*/
+    /*position: absolute;*/
+    /*top: -8px;*/
+    /*left: 0;*/
+/*}*/
+/*.fr li {*/
+    /*float: left;*/
+    /*padding: 0 10px;*/
+/*}*/
+/*.fr .line {*/
+    /*width: 1px;*/
+    /*height: 12px;*/
+    /*background-color: #ddd;*/
+    /*margin-top: 9px;*/
+    /*padding:0;*/
+/*}*/
+/*.shortcut .tel-jd{*/
+    /*padding:0 20px 0 25px;*/
+/*}*/
+/*.tel{*/
+    /*position: absolute;*/
+    /*width: 15px;*/
+    /*height: 20px;*/
+    /*background: url(../images/sprite.png) no-repeat;*/
+    /*left: 5px;*/
+    /*top:5px;*/
+/*}*/
+/*!*顶部end*!*/
+/*!*topbanner start*!*/
+/*.topbanner {*/
+    /*background-color: #8A25C6;*/
+/*}*/
+/*.close-banner {*/
+    /*position: absolute;*/
+    /*right:0;*/
+    /*top:5px;*/
+    /*width: 19px;*/
+    /*height: 19px;*/
+    /*background: url(../images/close.png) no-repeat;*/
+/*}*/
+/*.close-banner:hover {*/
+    /*background-position:bottom;*/
+/*}*/
+/*.tp{*/
+    /*position: relative;*/
+/*}*/
+
+/*!*topbanner end*!*/
+
+/*.logo {*/
+    /*width: 360px;*/
+    /*height: 75px;*/
+    /*background-color: pink;*/
+    /*float:left;*/
+    /*padding-top: 25px;*/
+    /*background: url(../images/logo.png) no-repeat 0 25px;*/
+    /*position: relative;*/
+/*}*/
+/*.jd-a{*/
+    /*display: block;*/
+    /*width: 270px;*/
+    /*height: 60px;*/
+    /*text-indent:-2000em;*/
+/*}*/
+/*.db11 {*/
+    /*position: absolute;*/
+    /*width: 180px;*/
+    /*height: 80px;*/
+    /*background-color: pink;*/
+    /*top: 10px;*/
+    /*left: 168px;*/
+/*}*/
+
+
+/* 头部开始 */
+.shortcut {
+    height: 30px;
+    line-height: 30px;
+    background-color: #f1f1f1;
+    width: 100%;
+}
+
+.dt,
+.shortcut .fore {
+    padding: 0px 25px 0px 10px;
+    position: relative;
+}
+
+.dt i,
+.fore i{
+    display: block;
+    height: 14px;
+    width: 14px;
+    position: absolute;
+    overflow: hidden;
+    right: 9px;
+    top: 12px;
+}
+
+.dt s,
+.fore s{
+    display: block;
+    height: 14px;
+    width: 14px;
+    font: normal bold 14px/14px arial,sans-serif;
+    position: relative;
+    top: -7px;
+}
+
+.fr li {
+    float: left;
+    padding: 0px 10px;
+}
+
+.fr .line {
+    /*display: block;*/
+    width: 1px;
+    height: 12px;
+    background-color: #cccccc;
+    padding: 0px;
+    margin-top: 9px;
+}
+
+/* 头部结束 */
+
+
+/* topbanner STATR */
+
+.topbanner {
+background-color: #8A25C6;
+}
+
+.tp {
+    position: relative;
+}
+
+.close-banner {
+    display: block;
+    width: 19px;
+    height: 19px;
+    background-color: red;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: url(../images/close.png) no-repeat;
+}
+
+.close-banner:hover {
+    background-position:bottom;
+}
+
+/* topbanner END */
+
+
+/* Search START */
+.logo {
+    width: 360px;
+    height: 75px;
+    background-color: pink;
+    float:left;
+    padding-top: 25px;
+    background: url(../images/logo.png) no-repeat 0 25px ;
+    position: relative;
+}
+
+.logo img {
+    position: absolute;
+    right: 12px;
+    top: 5px;
+}
+
+.search {
+    width: 538px;
+    height: 35px;
+    background-color: purple;
+    float: left;
+    margin-top: 30px;
+}
+
+.search input {
+    width: 450px;
+    height: 31px;
+    border: 2px solid #B61D1D;
+    float: left;
+    padding-left: 4px;
+    font: 14px/32px "microsoft yahei";
+    color: #666;
+    background-color: #F0F3EF;
+}
+
+.search button {
+    height: 35px;
+    background-color: #B61D1D;
+    width: 80px;
+    float: left;
+    font: 16px/36px "microsoft yahei";
+    color: #ffffff;
+    cursor: pointer;
+}
+
+.car {
+    /*background-color: blue;*/
+    float: left;
+    margin-left: 106px;
+    margin-top: 30px;
+    height: 34px;
+    line-height: 34px;
+
+    padding-left: 43px;
+    padding-right: 36px;
+    border: 1px solid #DFDFDF;
+
+    cursor: pointer;
+
+    position: relative;
+}
+
+.car .shopCar {
+
+    display: block;
+    width: 18px;
+    height: 15px;
+    position: absolute;
+
+    left: 17px;
+    top: 9px;
+
+    background: url(../images/sprite.png) no-repeat 0 -59px;
+}
+
+.car .more {
+    display: block;
+    width: 15px;
+    height: 15px;
+    line-height: 15px;
+    /*background-color: red;*/
+    position: absolute;
+    right: 17px;
+    top: 9px;
+
+    font: normal bold 15px/15px arial,sans-serif;
+}
+
+.hotword {
+    float: left;
+    width: 538px;
+    height: 20px;
+}
+
+.hotword li {
+    float: left;
+    padding-right: 8px;
+    color: #666666;
+    padding-top: 2px;
+}
+
+.topSearch {
+    height: 100px;
+}
+
+/* Search END */
+
+
+
+/* jd-nav START */
+
+.jd-nav {
+    width: 100%;
+    height: 44px;
+    border-bottom: 2px solid #B61D1D;
+}
+
+.dropdown {
+    height: 44px;
+    width: 200px;
+    float: left;
+    position: relative;
+    z-index: 10;
+    overflow: visible;
+}
+
+.dropdown .dt {
+    height: 45px;
+    padding-left: 10px;
+    background-color: #B61D1D;
+}
+
+.dropdown .dt a{
+    font:400 15px/44px "microsoft yahei";
+    color: #fff;
+    height: 44px;
+    width: 200px;
+}
+
+.dropdown .dd {
+    height: 496px;
+    background-color: #C81623;
+}
+
+.dropdown .item {
+    height: 31px;
+    line-height: 31px;
+    border-left: 1px solid #B61D1D;
+    padding-left: 10px;
+    color: #fff;
+    font-size: 14px;
+}
+
+.dropdown .item h3 {
+    float: left;
+}
+
+.dropdown .item span {
+    float: right;
+    margin-right: 15px;
+    font-weight: 600;
+    font-family: "Microsoft YaHei", STHeiti;
+    /*background-color: yellow;*/
+}
+
+
+.navitems {
+    float: left;
+    height: 44px;
+}
+
+.navitems li {
+    float: left;
+    display: block;
+    height: 44px;
+    padding: 0 20px;
+    line-height: 44px;
+    color: #333;
+    font: normal 15px/44px Arial, sans-serif;
+}
+
+
+.bike {
+    float: right;
+    height: 44px;
+    width: 140px;
+    background: url("../images/bike.jpg") no-repeat;
+    cursor: pointer;
+}
+
+.bike a {
+    height: 44px;
+}
+
+/* jd-nav END */
+
+
+/* footer start */
+
+.slogen {
+
+    height: 54px;
+    padding: 20px 0px;
+    background-color: #F5F5F5;
+}
+
+.slogen li {
+    float: left;
+    padding: 0px 40px;
+}
+
+
+/* footer end */
+
+
+
+
+body {
+    /*background-color: #F0F3EF;*/
+}
