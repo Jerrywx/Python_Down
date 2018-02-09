@@ -137,7 +137,6 @@ class MovieListToType(Base):
     # 电影类型
     type_id = Column(Integer, ForeignKey('movietype.id'))
 
-
 # =============================================== 基础表
 
 # 电影
@@ -145,7 +144,6 @@ class Movie(Base):
 
     # 设置表名
     __tablename__ = "movie"
-
 
     # 设置ID 类型 主键
     id              = Column(Integer, primary_key=True)
@@ -186,7 +184,6 @@ class Movie(Base):
     # 烂番茄
     movie_tomato_mark1  = Column(String(32))
     movie_tomato_mark2  = Column(String(32))
-
 
     # ------------------------------------------------ 主演导演编剧 【导演、编剧、主演、演员】
     # 主演列表
