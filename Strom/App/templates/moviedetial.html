@@ -1,16 +1,50 @@
 {% extends "base.html" %}
 
+{% block style %}
+
+<link rel="stylesheet" href="static/movieDetial.css">
+{% end %}
+
 {% block body %}
 
-<!-- 电影详情 -->
-<h4>{{movie.movie_name_cn}}</h4>
-<!--https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2508618114.webp-->
-<img src="{{movie.movie_cover}}" width="200" alt="封面">
+<h1>电影详情:</h1>
 
-<h4>原名: {{movie.movie_name_en}}</h4>
-<h4>时长: {{movie.movie_length}}</h4>
-<h4>简介: {{movie.movie_summary}}</h4>
-<a href="{{movie.movie_doubanUrl}}" target="_blank">豆瓣链接</a>
+<div class="movie_info">
+
+    <div class="movie_left">
+       <img src="{{movie.movie_cover}}" class="cover" >
+       <h1 class="title">{{movie.movie_name_cn}}</h1>
+    </div>
+
+
+    <div class="movie_right">
+     <h1 class="label">电影名称:</h1>
+
+     <p class="name">中文名: {{movie.movie_name_cn}}</p>
+     <p class="name">原名字: {{movie.movie_name_en}}</p>
+     <p class="name">别　名: {{movie.movie_name_ot}}</p>
+
+         <h1 class="label">电影人:</h1>
+
+         <h1 class="label">电影数据:</h1>
+
+
+         <h1 class="label">电影资源:</h1>
+
+
+    </div>
+
+</div>
+
+<!--&lt;!&ndash; 电影详情 &ndash;&gt;-->
+<!--<h4>{{movie.movie_name_cn}}</h4>-->
+<!--&lt;!&ndash;https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2508618114.webp&ndash;&gt;-->
+<!--<img src="{{movie.movie_cover}}" width="200" alt="封面">-->
+
+<!--<h4>原名: {{movie.movie_name_en}}</h4>-->
+<!--<h4>时长: {{movie.movie_length}}</h4>-->
+<!--<h4>简介: {{movie.movie_summary}}</h4>-->
+<!--<a href="{{movie.movie_doubanUrl}}" target="_blank">豆瓣链接</a>-->
 
 
 {% end %}

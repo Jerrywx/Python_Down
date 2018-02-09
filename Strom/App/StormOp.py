@@ -33,7 +33,6 @@ class Session():
 
         return session
 
-
 # 电影列表
 class StormOp(tornado.web.RequestHandler):
     page_size = 20
@@ -101,8 +100,6 @@ class StormOp(tornado.web.RequestHandler):
         movie = session.query(Movie).filter_by(id=movieId).all()
         return movie
 
-
-
 # 电影详情
 class MovieDetial(tornado.web.RequestHandler):
 
@@ -135,7 +132,6 @@ class MovieDetial(tornado.web.RequestHandler):
         movie = session.query(Movie).filter_by(id=movieId).first()
 
         return movie
-
 
 # 影集
 class MovieList(tornado.web.RequestHandler):
@@ -177,13 +173,11 @@ class Top250(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         self.render('top250.html')
 
-
 # 正在热映
 class Online(tornado.web.RequestHandler):
 
     def get(self, *args, **kwargs):
         self.render('online.html')
-
 
 # 影集详情
 class AlbumDetial(tornado.web.RequestHandler):
@@ -220,5 +214,3 @@ class AlbumDetial(tornado.web.RequestHandler):
         list = session.query(Movie).filter(Movie.movie_douban_id.in_(arrayOfId)).all()
 
         return list
-
-

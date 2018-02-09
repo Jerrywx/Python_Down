@@ -1,0 +1,51 @@
+
+
+/* 电影信息部分 */
+.movie_info {
+    width: 100%;
+    height: 600px;
+    /*background-color: #F1F1F1;*/
+}
+
+/* 左侧简介信息 */
+.movie_left {
+    width: 200px;
+    height: 100%;
+    /*background-color: #2b542c;*/
+    float: left;
+}
+
+.cover {
+    width: 160px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.title {
+    margin-top: 10px;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+}
+
+/* 右侧详细信息 */
+.movie_right {
+    float: right;
+    width: 800px;
+    height: 100%;
+    background-color: aquamarine;
+}
+
+.label {
+    color: black;
+    font-size: 18px;
+    margin-top: 20px;
+}
+
+
+.name {
+    margin-left: 40px;
+    display: block;
+    height: 20px;
+    line-height: 20px;
+}

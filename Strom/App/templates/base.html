@@ -77,6 +77,10 @@
 
     </style>
 
+    {% block style %}
+
+    {% end %}
+
 </head>
 <body style="background-color: #FAFAFA">
 
@@ -89,21 +93,19 @@
             <a href="movielist" class="list-group-item">影集</a>
             <a href="top250" class="list-group-item">Top 250</a>
             <a href="online" class="list-group-item">正在热映</a>
+            <a href="spider" class="list-group-item">数据采集</a>
         </div>
 
 
         <div class="content_right">
 
-                <div class="searchBar">
+            {% block search %}
 
-                    {% block search %}
+            {% end %}
 
-                    {% end %}
+            {% block body %}
 
-                </div>
-
-                {% block body %}
-                {% end %}
+            {% end %}
         </div>
     </div>
 
