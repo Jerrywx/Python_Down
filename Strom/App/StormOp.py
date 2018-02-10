@@ -118,16 +118,22 @@ class MovieDetial(tornado.web.RequestHandler):
 
     def get(self, *args, **kwargs):
 
+        # 抓取电影详情
+        spiderId = self.get_argument("spiderId", None)
+        if spiderId != None:
+            content = "电影详情" + spiderId
+            self.write(content)
+            return
+
+        # 返回数据库中的电影详细信息
         movieId = self.get_argument("movieid")
-
         movie = self.movieDerial(movieId)
-
         self.render('moviedetial.html', movie=movie)
 
 
     def movieDerial(self, movieId):
 
-        session = self.sqlSession()
+        session = Session.session()#self.sqlSession()
 
         movie = session.query(Movie).filter_by(id=movieId).first()
 

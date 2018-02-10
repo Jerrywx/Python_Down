@@ -12,8 +12,9 @@
 <div class="movie_info">
 
     <div class="movie_left">
-       <img src="{{movie.movie_cover}}" class="cover" >
-       <h1 class="title">{{movie.movie_name_cn}}</h1>
+        <img src="{{movie.movie_cover}}" class="cover" >
+        <h1 class="title">{{movie.movie_name_cn}}</h1>
+        <button type="button" onclick="test()" class="fetch_movie_detial" >获取详细数据</button>
     </div>
 
         <div class="movie_right">
@@ -63,7 +64,42 @@
 
 </div>
 
+
+<script>
+
+    function test() {
+
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else
+        {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function()
+        {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200)
+            {
+//                document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
+                alert(xmlhttp.status);
+                alert(xmlhttp.responseText);
+            }
+        }
+
+        var urlString = "/moviedetial?spiderId={{movie.id}}";
+
+        xmlhttp.open("GET", urlString, true);
+        xmlhttp.send();
+    }
+    
+</script>
+
 {% end %}
+
 
 
 
