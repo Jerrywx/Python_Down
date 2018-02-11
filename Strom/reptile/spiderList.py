@@ -369,7 +369,6 @@ def storeCelebrity():
 
     print(content)
 
-
 # ========================================================== 批量电影详情
 
 # 电影详细信息数据
@@ -386,7 +385,6 @@ class MovieDetial():
         session = Session()
 
         return session
-
 
     # 获取电影ID列表
     def movieIdList(self):
@@ -410,7 +408,6 @@ class MovieDetial():
         session.close()
 
         return idList
-
 
     # 根据 电影ID 获取电影链接
     def movieLink(self, movieId):

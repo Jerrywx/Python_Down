@@ -216,6 +216,8 @@ class Movie(Base):
         Index('ix_id_name', 'movie_douban_id', 'movie_name_cn'),
     )
 
+    # ------------------------------------------------ json 字典转模型
+
 # 电影人
 class Celebrity(Base):
 
@@ -400,7 +402,6 @@ class MovieAlbum(Base):
 
 # 创建表
 Base.metadata.create_all(engine)
-
 
 # if __name__ == '__main__':
 #     print(sqlalchemy.__version__)

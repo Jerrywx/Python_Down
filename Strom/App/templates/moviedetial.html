@@ -75,22 +75,20 @@
             //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
             xmlhttp=new XMLHttpRequest();
         }
-        else
-        {
+        else {
             // IE6, IE5 浏览器执行代码
             xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xmlhttp.onreadystatechange=function()
-        {
-            if (xmlhttp.readyState==4 && xmlhttp.status==200)
-            {
-//                document.getElementById("myDiv").innerHTML=xmlhttp.responseText;
-                alert(xmlhttp.status);
-                alert(xmlhttp.responseText);
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+//                var json = xmlhttp.responseText;
+//                var obj = JSON.parse(json);
+//                console.log(obj.title)
+                location.reload();
             }
         }
 
-        var urlString = "/moviedetial?spiderId={{movie.id}}";
+        var urlString = "/moviedetial?spiderId={{movie.movie_douban_id}}";
 
         xmlhttp.open("GET", urlString, true);
         xmlhttp.send();
@@ -99,23 +97,4 @@
 </script>
 
 {% end %}
-
-
-
-
-
- id                 | int(11)       | NO   | PRI | NULL    | auto_increment |
-| complete           | tinyint(1)    | YES  |     | NULL    |                |
-| movie_name_cn      | varchar(128)  | YES  |     | NULL    |                |
-| movie_name_en      | varchar(128)  | YES  |     | NULL    |                |
-| movie_name_ot      | varchar(128)  | YES  |     | NULL    |                |
-| movie_cover        | varchar(256)  | YES  |     | NULL    |                |
-| movie_summary      | varchar(2048) | YES  |     | NULL    |                |
-| movie_length       | int(11)       | YES  |     | NULL    |                |
-| movie_release      | varchar(128)  | YES  |     | NULL    |                |
-| movie_language     | varchar(128)  | YES  |     | NULL    |                |
-| movie_douban_mark  | varchar(32)   | YES  |     | NULL    |                |
-| movie_doubanUrl    | varchar(256)  | YES  |     | NULL    |                |
-| movie_douban_id    | int(11)       | YES  | MUL | NULL    |                |
-| movie_tomato_mark1 | varchar(32)   | YES  |     | NULL    |                |
-| movie_tomato_mark2
+rk2
