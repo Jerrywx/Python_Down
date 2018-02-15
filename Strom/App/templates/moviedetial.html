@@ -81,9 +81,6 @@
         }
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
-//                var json = xmlhttp.responseText;
-//                var obj = JSON.parse(json);
-//                console.log(obj.title)
                 location.reload();
             }
         }
@@ -93,7 +90,7 @@
         xmlhttp.open("GET", urlString, true);
         xmlhttp.send();
     }
-    
+
 </script>
 
 {% end %}

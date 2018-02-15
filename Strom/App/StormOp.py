@@ -16,7 +16,7 @@ import sys
 sys.path.append("../sqlManager")
 sys.path.append("../reptile")
 from movieApi import top250, baseApi, celebrity, movieInfo, comingSoon, movieList
-from dataManager import Movie, Country, MovieType, Celebrity, MovieAlbum, Resource
+from dataManager import Movie, Country, MovieType, Celebrity, MovieAlbum, Resource, Image
 import math
 
 # 数据库管理类
@@ -248,7 +248,7 @@ class spiderMovieDetial():
         else:
             # 电影不存在
             print("--------- 电影不存在")
-            movie = Movie()
+            # movie = Movie()
             self.updateMovie(movie, data, session)
 
         session.commit()
@@ -269,28 +269,27 @@ class spiderMovieDetial():
         # 3. 拼接url 创建请求
         urlString = baseApi + movieInfo
         urlString = urlString.replace("{id}", movieId)
-        # request = urllib.request.Request(urlString, headers=ua_heaeders)
-        #
-        # print("urlString ", urlString)
-        #
-        # # 4. 向指定url地址发送请求
-        # response = urllib.request.urlopen(request)
-        #
-        # # 5. read() 方法读取文件里的全部内容，返回字符串
-        # html = response.read()
-        #
+        request = urllib.request.Request(urlString, headers=ua_heaeders)
+
+        print("urlString ", urlString)
+
+        # 4. 向指定url地址发送请求
+        response = urllib.request.urlopen(request)
+
+        # 5. read() 方法读取文件里的全部内容，返回字符串
+        html = response.read()
+
         # # 6. 保存json
         filePath = "./resource/detial" + movieId + ".json"
-        # file = open(filePath, "w")
-        # file.write(html.decode("utf-8"))
-        # print(html.decode("utf-8"))
+        file = open(filePath, "w")
+        file.write(html.decode("utf-8"))
+        print(html.decode("utf-8"))
 
 
-        file = open(filePath, "r")
-        content = file.read()
-        # print(content)
+        # file = open(filePath, "r")
+        # content = file.read()
 
-        return content
+        return html#content
 
 
     @classmethod
@@ -303,15 +302,24 @@ class spiderMovieDetial():
         # 解析json
         js = json.loads(jsonData)
 
-        #
+        # 中文名
         movie.movie_name_cn = js.get("title", "")
+        # 原名
         movie.original_title = js.get("original_title", "")
+        # 上映年份
         movie.movie_release = js.get("year", "")
+        # 别名
         movie.movie_name_ot = ",".join(js.get("aka", []))
+        # 评分
         movie.movie_douban_mark = js.get("rating", {}).get("average", "")
+        # 封面
         movie.movie_cover = js.get("images", {}).get("large", "")
+        # 豆瓣链接
         movie.movie_doubanUrl = js.get("alt", "")
+        # 简介
         movie.movie_summary = js.get("summary", "")
+        # 时长
+        # movie.movie_length = js.get("",0)
 
         # 国家
         countrys = js.get("countries", "")
@@ -326,18 +334,97 @@ class spiderMovieDetial():
                 counrtyList.append(c)
         movie.movie_location = counrtyList
 
+        # 类型
+        types = js.get("genres", [])
+        typeList = []
+        for t in types:
+            typ = session.query(MovieType).filter_by(type=t).first()
+            if typ == None:
+                tt = MovieType()
+                tt.type = t
+                typeList.append(tt)
+            else:
+                typeList.append(typ)
+
+        # 电影人
+        # 导演
+        person = js.get("directors", [])
+        pList = []
+        for p in person:
+            print("----------- 导演", p["name"])
+            ID = p.get("id", "")
+            cel = session.query(Celebrity).filter_by(douban_id=ID).first()
+            if cel == None:
+                cel = Celebrity()
+                cel.doubanUrl = p.get("alt","")
+                cel.name_cn = p.get("name", "")
+                cel.douban_id = p.get("id", "")
+                image = Image()
+                image.large = p.get("avatars", {}).get("large", "")
+                cel.images = [image]
+                pList.append(cel)
+                session.add(image)
+                session.add(cel)
+            else:
+                cel.doubanUrl = p.get("alt", "")
+                cel.name_cn = p.get("name", "")
+                cel.douban_id = p.get("id", "")
+                image = Image()
+                image.large = p.get("avatars", {}).get("large", "")
+                cel.images = [image]
+                session.add(image)
+                session.add(cel)
+                pList.append(cel)
+        movie.movie_actors = pList
+        session.commit()
+
+        for p in pList:
+            for item in p.atm:
+                item.relationship = 1
+
+        # 主演
+        casts = js.get("casts", [])
+        pList = []
+        for p in casts:
+            print("----------- 主演", p["name"])
+            ID = p.get("id", "")
+            cel = session.query(Celebrity).filter_by(douban_id=ID).first()
+            if cel == None:
+                cel = Celebrity()
+                cel.doubanUrl = p.get("alt", "")
+                cel.name_cn = p.get("name", "")
+                cel.douban_id = p.get("id", "")
+                image = Image()
+                image.large = p.get("avatars", {}).get("large", "")
+                cel.images = [image]
+                pList.append(cel)
+                session.add(image)
+                session.add(cel)
+            else:
+                cel.doubanUrl = p.get("alt", "")
+                cel.name_cn = p.get("name", "")
+                cel.douban_id = p.get("id", "")
+                image = Image()
+                image.large = p.get("avatars", {}).get("large", "")
+                cel.images = [image]
+                session.add(image)
+                session.add(cel)
+                pList.append(cel)
+        movie.movie_actors = pList + movie.movie_actors
+        session.commit()
+
+        for p in pList:
+            for item in p.atm:
+                item.relationship = 2
 
 
-        print("==========================")
-        print("==========================")
+        # print("----------- 演员", p["name"])
 
-        print(movie.movie_name_cn)
-        print(movie.movie_name_ot)
-        print(movie.movie_release)
-        print(movie.movie_cover)
 
-        print("==========================")
-        print("==========================")
+
+
+
+        # movie.movie_type = typeList
 
 
         # ------------------------------------------------ 电影名【中文名、英文名、别名、封面】
