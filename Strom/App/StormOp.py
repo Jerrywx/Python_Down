@@ -60,10 +60,8 @@ class StormOp(tornado.web.RequestHandler):
         session = self.sqlSession()
         count = session.query(Movie).count()
 
-
         # 获取页数
         numb = math.ceil(count/self.page_size)
-        print("====================== ", str(number))
 
         # self.render('StormOp.html')
         self.render('StormOp.html', movieList=movieList, count=numb)
@@ -123,10 +121,6 @@ class MovieDetial(tornado.web.RequestHandler):
         if spiderId != None:
             # content = "电影详情" + spiderId
             movie = spiderMovieDetial.spiderMovie(spiderId)
-
-            print("-------------------------")
-            print(movie.movie_name_cn)
-            print("-------------------------")
             self.render('moviedetial.html', movie=movie)
             return
 
@@ -217,14 +211,31 @@ class AlbumDetial(tornado.web.RequestHandler):
     def getAlbumList(self, listId):
 
         arrayOfId = listId.split(",")
-
-
         # query.filter(User.name.in_(['ed', 'wendy', 'jack']))
         session = Session.session()
         list = session.query(Movie).filter(Movie.movie_douban_id.in_(arrayOfId)).all()
 
         return list
 
+# 电影人详情
+class CelDetial(tornado.web.RequestHandler):
+
+    def get(self, *args, **kwargs):
+        # 获取电影人ID
+        celId = self.get_argument("celId", 0)
+
+        # 获取电影人信息
+        person = self.celDetial(celId)
+
+        # 渲染页面
+        return self.render('celDetial.html', person=person)
+
+    def celDetial(self, celId):
+        session = Session.session()
+        person = session.query(Celebrity).filter_by(douban_id=celId).first()
+        if person == None:
+            return None
+        return person
 
 #================================================= 根据电影ID获取电影详细信息
 class spiderMovieDetial():
@@ -243,11 +254,9 @@ class spiderMovieDetial():
         # 保存更新数据库数据
         if movie != None:
             # 电影存在
-            print("--------- 电影存在")
             self.updateMovie(movie, data, session)
         else:
             # 电影不存在
-            print("--------- 电影不存在")
             # movie = Movie()
             self.updateMovie(movie, data, session)
 
@@ -274,7 +283,13 @@ class spiderMovieDetial():
         print("urlString ", urlString)
 
         # 4. 向指定url地址发送请求
-        response = urllib.request.urlopen(request)
+        # response = urllib.request.urlopen(request)
+
+        try:
+            response = urllib.request.urlopen(request)
+        except urllib.error.HTTPError as err:
+            print("URL:", urlString, "\nurllib.error.HTTPError: ", err)
+            return None
 
         # 5. read() 方法读取文件里的全部内容，返回字符串
         html = response.read()
@@ -283,11 +298,6 @@ class spiderMovieDetial():
         filePath = "./resource/detial" + movieId + ".json"
         file = open(filePath, "w")
         file.write(html.decode("utf-8"))
-        print(html.decode("utf-8"))
-
-
-        # file = open(filePath, "r")
-        # content = file.read()
 
         return html#content
 
@@ -351,7 +361,6 @@ class spiderMovieDetial():
         person = js.get("directors", [])
         pList = []
         for p in person:
-            print("----------- 导演", p["name"])
             ID = p.get("id", "")
             cel = session.query(Celebrity).filter_by(douban_id=ID).first()
             if cel == None:
@@ -386,7 +395,6 @@ class spiderMovieDetial():
         casts = js.get("casts", [])
         pList = []
         for p in casts:
-            print("----------- 主演", p["name"])
             ID = p.get("id", "")
             cel = session.query(Celebrity).filter_by(douban_id=ID).first()
             if cel == None:
@@ -416,27 +424,5 @@ class spiderMovieDetial():
         for p in pList:
             for item in p.atm:
                 item.relationship = 2
-
-
-        # print("----------- 演员", p["name"])
-
-
-
-
-
-        # movie.movie_type = typeList
-
-
-        # ------------------------------------------------ 电影名【中文名、英文名、别名、封面】
-        # # 电影中文名
-        # movie_name_cn = Column(String(128))
-        # # 电影英文名
-        # movie_name_en = Column(String(128))
-        # # 电影其他名字
-        # movie_name_ot = Column(String(128))
-        # # 电影封面 url地址
-        # movie_cover = Column(String(256))
-        # # 电影简介
-        # movie_summary = Column(String(2048))
 
         return movie

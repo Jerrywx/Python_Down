@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 
 {% block style %}
-
 <link rel="stylesheet" href="static/movieDetial.css">
 {% end %}
 
@@ -11,54 +10,63 @@
 
 <div class="movie_info">
 
+    <!-- 左侧电影简介信息 -->
     <div class="movie_left">
         <img src="{{movie.movie_cover}}" class="cover" >
         <h1 class="title">{{movie.movie_name_cn}}</h1>
         <button type="button" onclick="test()" class="fetch_movie_detial" >获取详细数据</button>
     </div>
 
-        <div class="movie_right">
+    <!-- 右侧电影详细信息 -->
+    <div class="movie_right">
 
-            <h1 class="label">电影名称:</h1>
+        <h1 class="label">电影名称:</h1>
 
-            <p class="name">中文名: </p>
-            <input type="text" value="{{movie.movie_name_cn}}">
-            <p class="name">原名字: {{movie.movie_name_en}}</p>
-            <p class="name">别　名: {{movie.movie_name_ot}}</p>
+        <p class="name">中文名: </p>
+        <input type="text" value="{{movie.movie_name_cn}}">
+        <p class="name">原名字: </p>
+        <input type="text" value="{{movie.movie_name_en}}">
+        <p class="name">别　名: </p>
+        <input type="text" value="{{movie.movie_name_ot}}">
 
-            <h1 class="label">电影人:</h1>
-            <p class="name">导演:</p>
-            <p>
-                {% for item in movie.movie_actors %}
+        <h1 class="label">电影人:</h1>
+        <p class="name">导演:</p>
+        <p>
+            {% for item in movie.movie_actors %}
 
-                    {% if item.atm[0].relationship == 1 %}
+                {% if item.atm[0].relationship == 1 %}
+                    <a href="cel?celId={{item.atm[0].cel.douban_id}}">
                         <p class="name2">{{item.atm[0].cel.name_cn}}</p>
-                    {% end %}
+                    </a>
                 {% end %}
-            </p>
-            <p class="name">主演:</p>
-            <p>
-                {% for item in movie.movie_actors %}
-
-                    {% if item.atm[0].relationship == 2 %}
-                        <p class="name2">{{item.atm[0].cel.name_cn}}</p>
-                    {% end %}
-                {% end %}
-            </p>
-            <p class="name">编剧:</p>
-
-            {% if len(movie.movie_location) > 0 %}
-                <p class="name">发行地:{{movie.movie_location[0].name}}</p>
             {% end %}
+        </p>
+        <p class="name">主演:</p>
+        <p>
+            {% for item in movie.movie_actors %}
+
+                {% if item.atm[0].relationship == 2 %}
+                    <a href="cel?celId={{item.atm[0].cel.douban_id}}">
+                        <p class="name2">{{item.atm[0].cel.name_cn}}</p>
+                    </a>
+                {% end %}
+            {% end %}
+        </p>
+        <p class="name">编剧:</p>
+
+        {% if len(movie.movie_location) > 0 %}
+            <a href="#"><p class="name">发行地:{{movie.movie_location[0].name}}</p></a>
+        {% end %}
 
 
-            <h1 class="label">电影数据:</h1>
-            <p class="name">时长:{{movie.movie_length}}</p>
-            <p class="name">豆瓣:{{movie.movie_douban_mark}}</p>
-            <p class="name">简介:</p>
-            <p class="summary">{{movie.movie_summary}}</p>
+        <h1 class="label">电影数据:</h1>
+        <p class="name">时长:{{movie.movie_length}}</p>
+        <p class="name">豆瓣:{{movie.movie_douban_mark}}</p>
+        <p class="name">简介:</p>
+        <!--<p class="summary">{{movie.movie_summary}}</p>-->
+        <textarea>{{movie.movie_summary}}</textarea>
 
-            <h1 class="label">电影资源:</h1>
+        <h1 class="label">电影资源:</h1>
 
     </div>
 
@@ -94,4 +102,3 @@
 </script>
 
 {% end %}
-rk2
