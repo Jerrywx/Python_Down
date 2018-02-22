@@ -181,6 +181,11 @@ class MovieList(tornado.web.RequestHandler):
         session = Session.session()
         return session.query(MovieAlbum).filter_by(id=albumId).all()
 
+# 公司
+class Company(tornado.web.RequestHandler):
+    def get(self, *args, **kwargs):
+        self.render('company.html')
+
 # Top250
 class Top250(tornado.web.RequestHandler):
 
