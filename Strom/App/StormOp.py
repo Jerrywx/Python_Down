@@ -95,9 +95,19 @@ class StormOp(tornado.web.RequestHandler):
 
     # 搜索
     def search(self, movieId):
+
         session = Session.session();
-        movie = session.query(Movie).filter_by(id=movieId).all()
-        return movie
+
+        if movieId.isdigit():
+
+            movie = session.query(Movie).filter_by(id=movieId).all()
+            return movie
+        else:
+            value = "%" + movieId + "%"
+            movie = session.query(Movie).filter(Movie.movie_name_cn.like(value)).all()
+
+            return movie
+
 
 # 电影详情
 class MovieDetial(tornado.web.RequestHandler):
