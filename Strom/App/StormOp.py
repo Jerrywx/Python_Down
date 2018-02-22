@@ -238,6 +238,7 @@ class CelDetial(tornado.web.RequestHandler):
         return person
 
 #================================================= 根据电影ID获取电影详细信息
+# 
 class spiderMovieDetial():
 
     # 抓取电影详细信息并保存
