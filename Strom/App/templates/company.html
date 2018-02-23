@@ -1,5 +1,28 @@
 {% extends "base.html" %}
 
+{% block style %}
+<link rel="stylesheet" href="static/company.css">
+{% end %}
+
 {% block body %}
-电影公司
+
+<!-- 导航 -->
+<div class="nav">
+    <!--<button class="add" type="button" onclick="test()">添加</button>-->
+    <a href="companyEdit" class="add">添加</a>
+</div>
+
+<div class="info">
+
+</div>
+
+<script>
+
+    function test() {
+        alert("哈哈")
+    }
+
+</script>
+
+
 {% end %}
