@@ -13,7 +13,6 @@ sys.path.append("../sqlManager")
 from dataManager import Movie
 from enum import Enum
 
-
 # 电影分类
 class MovieClass(Enum):
     Hot         = "热门"

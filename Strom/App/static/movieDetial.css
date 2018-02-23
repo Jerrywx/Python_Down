@@ -1,0 +1,86 @@
+/* 电影信息部分 */
+.movie_info {
+    width: 100%;
+    height: 600px;
+    /*background-color: #F1F1F1;*/
+}
+
+/* 左侧简介信息 */
+.movie_left {
+    width: 200px;
+    height: 100%;
+    /*background-color: #2b542c;*/
+    float: left;
+}
+
+.cover {
+    width: 160px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
+
+.title {
+    margin-top: 10px;
+    font-size: 16px;
+    color: black;
+    text-align: center;
+}
+
+.fetch_movie_detial {
+    width: 160px;
+    height: 30px;
+    display: block;
+    font-size: 12px;
+    margin-top: 10px;
+    margin-left: 20px;
+    background-color:#A0A0A0;
+}
+
+/* 右侧详细信息 */
+.movie_right {
+    float: right;
+    width: 800px;
+    height: 100%;
+    padding-top: 10px;
+    /*background-color: #9d9d9d;*/
+}
+
+.movie_right input {
+    display: block;
+    background-color: rgba(0,0,0,0.0);
+    margin-left: 60px;
+    width: 600px;
+}
+
+.movie_right textarea {
+    margin-left: 60px;
+    width: 600px;
+    height: 100px;
+}
+
+.label {
+    color: black;
+    font-size: 18px;
+    margin-top: 10px;
+}
+
+.name {
+    margin-left: 40px;
+    display: block;
+    height: 20px;
+    line-height: 20px;
+}
+
+.name2 {
+    margin-left: 60px;
+    height: 20px;
+    line-height: 20px;
+}
+
+.summary {
+    margin-left: 60px;
+    margin-right: 20px;
+    display: block;
+}
+
+

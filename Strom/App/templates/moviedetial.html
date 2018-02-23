@@ -1,35 +1,104 @@
 {% extends "base.html" %}
 
-{% block body %}
-
-<!-- 电影详情 -->
-<h4>{{movie.movie_name_cn}}</h4>
-<!--https://img3.doubanio.com/view/photo/s_ratio_poster/public/p2508618114.webp-->
-<img src="{{movie.movie_cover}}" width="200" alt="封面">
-
-<h4>原名: {{movie.movie_name_en}}</h4>
-<h4>时长: {{movie.movie_length}}</h4>
-<h4>简介: {{movie.movie_summary}}</h4>
-<a href="{{movie.movie_doubanUrl}}" target="_blank">豆瓣链接</a>
-
-
+{% block style %}
+<link rel="stylesheet" href="static/movieDetial.css">
 {% end %}
 
+{% block body %}
+
+<h1>电影详情:</h1>
+
+<div class="movie_info">
+
+    <!-- 左侧电影简介信息 -->
+    <div class="movie_left">
+        <img src="{{movie.movie_cover}}" class="cover" >
+        <h1 class="title">{{movie.movie_name_cn}}</h1>
+        <button type="button" onclick="test()" class="fetch_movie_detial" >获取详细数据</button>
+    </div>
+
+    <!-- 右侧电影详细信息 -->
+    <div class="movie_right">
+
+        <h1 class="label">电影名称:</h1>
+
+        <p class="name">中文名: </p>
+        <input type="text" value="{{movie.movie_name_cn}}">
+        <p class="name">原名字: </p>
+        <input type="text" value="{{movie.movie_name_en}}">
+        <p class="name">别　名: </p>
+        <input type="text" value="{{movie.movie_name_ot}}">
+
+        <h1 class="label">电影人:</h1>
+        <p class="name">导演:</p>
+        <p>
+            {% for item in movie.movie_actors %}
+
+                {% if item.atm[0].relationship == 1 %}
+                    <a href="cel?celId={{item.atm[0].cel.douban_id}}">
+                        <p class="name2">{{item.atm[0].cel.name_cn}}</p>
+                    </a>
+                {% end %}
+            {% end %}
+        </p>
+        <p class="name">主演:</p>
+        <p>
+            {% for item in movie.movie_actors %}
+
+                {% if item.atm[0].relationship == 2 %}
+                    <a href="cel?celId={{item.atm[0].cel.douban_id}}">
+                        <p class="name2">{{item.atm[0].cel.name_cn}}</p>
+                    </a>
+                {% end %}
+            {% end %}
+        </p>
+        <p class="name">编剧:</p>
+
+        {% if len(movie.movie_location) > 0 %}
+            <a href="#"><p class="name">发行地:{{movie.movie_location[0].name}}</p></a>
+        {% end %}
 
 
+        <h1 class="label">电影数据:</h1>
+        <p class="name">时长:{{movie.movie_length}}</p>
+        <p class="name">豆瓣:{{movie.movie_douban_mark}}</p>
+        <p class="name">简介:</p>
+        <!--<p class="summary">{{movie.movie_summary}}</p>-->
+        <textarea>{{movie.movie_summary}}</textarea>
 
- id                 | int(11)       | NO   | PRI | NULL    | auto_increment |
-| complete           | tinyint(1)    | YES  |     | NULL    |                |
-| movie_name_cn      | varchar(128)  | YES  |     | NULL    |                |
-| movie_name_en      | varchar(128)  | YES  |     | NULL    |                |
-| movie_name_ot      | varchar(128)  | YES  |     | NULL    |                |
-| movie_cover        | varchar(256)  | YES  |     | NULL    |                |
-| movie_summary      | varchar(2048) | YES  |     | NULL    |                |
-| movie_length       | int(11)       | YES  |     | NULL    |                |
-| movie_release      | varchar(128)  | YES  |     | NULL    |                |
-| movie_language     | varchar(128)  | YES  |     | NULL    |                |
-| movie_douban_mark  | varchar(32)   | YES  |     | NULL    |                |
-| movie_doubanUrl    | varchar(256)  | YES  |     | NULL    |                |
-| movie_douban_id    | int(11)       | YES  | MUL | NULL    |                |
-| movie_tomato_mark1 | varchar(32)   | YES  |     | NULL    |                |
-| movie_tomato_mark2
+        <h1 class="label">电影资源:</h1>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function test() {
+
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+                location.reload();
+            }
+        }
+
+        var urlString = "/moviedetial?spiderId={{movie.movie_douban_id}}";
+
+        xmlhttp.open("GET", urlString, true);
+        xmlhttp.send();
+    }
+
+</script>
+
+{% end %}

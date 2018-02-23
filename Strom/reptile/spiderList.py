@@ -369,7 +369,6 @@ def storeCelebrity():
 
     print(content)
 
-
 # ========================================================== 批量电影详情
 
 # 电影详细信息数据
@@ -386,7 +385,6 @@ class MovieDetial():
         session = Session()
 
         return session
-
 
     # 获取电影ID列表
     def movieIdList(self):
@@ -411,7 +409,6 @@ class MovieDetial():
 
         return idList
 
-
     # 根据 电影ID 获取电影链接
     def movieLink(self, movieId):
 
@@ -433,34 +430,42 @@ class MovieDetial():
         # 电影ID列表
         movieList = self.movieIdList()
 
-        movieList = []
+        # movieList = []
+        print("======================================")
+        print(movieList)
+        print("======================================")
+
+        # cccc = 0
 
         # 遍历电影ID列表
         for movieId in movieList:
 
             tt = random.randint(1, 4)
             print('-------------sleep:', str(tt))
-            # time.sleep(tt)
+            time.sleep(tt)
+            #
+            # # ========================================
+            # if cccc > 40:
+            #     print("asdasdasdasdasdasas")
+            #     return
+            # cccc += 1
+            # # ========================================
 
             # 电影URL
             urlString = self.movieLink(movieId)
 
-            print(urlString)
+            print("AA" , urlString)
             # 请求数据
             request = urllib.request.Request(urlString, headers=ua_heaeders)
             # 向指定url地址发送请求
             try:
                 response = urllib.request.urlopen(request)
-                break
+                print("acacccccccccccccccc")
+                # break
             except urllib.error.HTTPError as err:
+                print("acaccccccccccccccccaaaaAA!!!!!!!")
                 print("URL:", urlString,  "\nurllib.error.HTTPError: ", err)
                 continue
-
-            print("go on")
-            print("go on")
-            print("go on")
-            print("go on")
-
 
             # read() 方法读取文件里的全部内容，返回字符串
             html = response.read()
@@ -480,7 +485,7 @@ class MovieDetial():
             # file.write(html.decode("utf-8"))
             # file.write(content)
             # 解析数据
-            # self.analysisMovie(content)
+            self.analysisMovie(content)
 
 
     def analysisMovie(self, content):
@@ -1010,11 +1015,11 @@ timess()
 
 # soon = MovieComingSoon()
 # soon.spiderAction()
-
-list = MovieList()
-list.spiderAction()
-
 #
-# movie = MovieDetial()
-# movie.spiderMpvie()
+# list = MovieList()
+# list.spiderAction()
+#
+#
+movie = MovieDetial()
+movie.spiderMpvie()
 # print(movie.movieIdList())

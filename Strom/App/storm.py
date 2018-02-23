@@ -22,7 +22,7 @@ import tornado.ioloop
 import tornado.options
 import os
 import tornado.web
-from StormOp import StormOp, MovieDetial, MovieList, Top250, Online, AlbumDetial
+from StormOp import StormOp, MovieDetial, MovieList, Top250, Online, AlbumDetial, CelDetial, Company
 from Spider import Spider
 
 # Tornado包括了一个有用的模块（tornado.options）来从命令行中读取设置。
@@ -42,9 +42,11 @@ application = tornado.web.Application([
     (r"/spider", Spider),
     (r"/moviedetial", MovieDetial),
     (r"/movielist", MovieList),
+    (r"/company", Company),
     (r"/top250", Top250),
     (r"/online", Online),
-    (r"/album", AlbumDetial)],
+    (r"/album", AlbumDetial),
+    (r"/cel", CelDetial)],
     **settings )
 
 # 运行Tornado

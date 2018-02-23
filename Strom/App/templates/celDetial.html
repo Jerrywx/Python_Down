@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block style %}
+<link rel="stylesheet" href="static/celDetial.css">
+{% end %}
+
+{% block body %}
+
+<h1>电影人:</h1>
+
+<div class="movie_info">
+
+    <!-- 左侧电影简介信息 -->
+    <div class="movie_left">
+
+        <img src="{{person.images[0].large}}">
+        <h1 class="name">{{person.name_cn}}</h1>
+        <button type="button" onclick="fecthDetial()" class="fetch_movie_detial" >获取详细数据</button>
+
+    </div>
+
+    <!-- 右侧电影详细信息 -->
+    <div class="movie_right">
+
+        <h1 class="title">基本信息:</h1>
+        <p class="cont">名字:</p>
+            <input type="text" value="{{person.name_cn}}">
+        <p class="cont">别名:</p>
+            <input type="text" value="{{person.name_en}}">
+        <!--<input type="text" value="{{person.douban_id}}">-->
+
+        <p class="cont">昵称:</p>
+        <input type="text" value="{{person.name_aka}}">
+
+        <p class="cont">性别:</p>
+        <input type="text" value="{{person.gender}}">
+
+        <p class="cont">出生地:</p>
+        <input type="text" value="{{person.bornPlace}}">
+
+
+        <h1 class="title">主演电影:</h1>
+            {% for mv in person.works %}
+                <p class="cont">{{mv.movie_name_cn}}</p>
+            {% end %}
+        <h1 class="title">导演电影:</h1>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    function fecthDetial() {
+        alert("fecthDetial")
+    }
+
+</script>
+
+{% end %}
