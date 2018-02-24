@@ -137,6 +137,10 @@ class MovieDetial(tornado.web.RequestHandler):
         # 返回数据库中的电影详细信息
         movieId = self.get_argument("movieid")
         movie = self.movieDerial(movieId)
+
+        if movie == None:
+            print("================== 获取电影信息为空")
+
         self.render('moviedetial.html', movie=movie)
 
     def movieDerial(self, movieId):
