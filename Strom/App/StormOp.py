@@ -72,7 +72,6 @@ class StormOp(tornado.web.RequestHandler):
         # INPUTS_LIST.append(name)
         self.render('StormOp.html')
 
-
     # 获取数据库句柄
     def sqlSession(self):
         # 1. 链接数据库
@@ -84,7 +83,6 @@ class StormOp(tornado.web.RequestHandler):
         session = Session()
 
         return session
-
 
     # 从数据库读取电影数据
     def fetchMovies(self):
@@ -179,21 +177,11 @@ class MovieList(tornado.web.RequestHandler):
 
         self.render('movieList.html', movieAlbum=list, count=numb)
 
-
     def getAlbum(self, albumId):
 
         session = Session.session()
         return session.query(MovieAlbum).filter_by(id=albumId).all()
 
-# 公司
-class Company(tornado.web.RequestHandler):
-    def get(self, *args, **kwargs):
-        self.render('company.html')
-
-# 编辑
-class CompanyEdit(tornado.web.RequestHandler):
-    def get(self, *args, **kwargs):
-        self.render('companyEdit.html')
 
 # Top250
 class Top250(tornado.web.RequestHandler):

@@ -22,7 +22,8 @@ import tornado.ioloop
 import tornado.options
 import os
 import tornado.web
-from StormOp import StormOp, MovieDetial, MovieList, Top250, Online, AlbumDetial, CelDetial, Company, CompanyEdit
+from StormOp import StormOp, MovieDetial, MovieList, Top250, Online, AlbumDetial, CelDetial
+from Company import Company, CompanyEdit
 from Spider import Spider
 
 # Tornado包括了一个有用的模块（tornado.options）来从命令行中读取设置。
