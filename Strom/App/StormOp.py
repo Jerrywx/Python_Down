@@ -190,6 +190,11 @@ class Company(tornado.web.RequestHandler):
     def get(self, *args, **kwargs):
         self.render('company.html')
 
+# 编辑
+class CompanyEdit(tornado.web.RequestHandler):
+    def get(self, *args, **kwargs):
+        self.render('companyEdit.html')
+
 # Top250
 class Top250(tornado.web.RequestHandler):
 
