@@ -14,15 +14,31 @@ import sys
 sys.path.append("../sqlManager")
 sys.path.append("../reptile")
 from movieApi import top250, baseApi, celebrity, movieInfo, comingSoon, movieList
-from dataManager import Movie, Country, MovieType, Celebrity, MovieAlbum, Resource, Image
+from dataManager import Movie, Country, MovieType, Celebrity, MovieAlbum, Resource, Image, Company
 import math
 from sqlalchemy.ext.declarative import DeclarativeMeta
 from datetime import datetime
 
 # 公司
-class Company(tornado.web.RequestHandler):
+class Companys(tornado.web.RequestHandler):
+
+    # get 方法
     def get(self, *args, **kwargs):
-        self.render('company.html')
+
+        list = self.getCompanyList()
+
+        self.render('company.html', company=list)
+
+
+    # 获取公司列表
+    def getCompanyList(self):
+
+        session = Session.session()
+
+        list = session.query(Company).all()
+
+        return list
+
 
 
 # 编辑
@@ -63,6 +79,31 @@ class CompanyEdit(tornado.web.RequestHandler):
 
         # 渲染页面
         self.render('companyEdit.html', movieList=[])
+
+    # 提交表单
+    def post(self, *args, **kwargs):
+        session = Session.session()
+        company = Company()
+        company.name = self.get_argument("name_cn")
+        company.name_en = self.get_argument("name_en")
+        company.address = self.get_argument("address")
+        company.create_time = self.get_argument("time")
+
+        company.deal_with = self.get_argument("job")
+        company.nature = self.get_argument("type")
+        company.create_person = self.get_argument("person")
+        company.p_company = self.get_argument("p_company")
+
+        company.desc_info = self.get_argument("desc")
+
+        session.add(company)
+        session.commit()
+
+        list = session.query(Company).all()
+
+        # 渲染页面
+        self.render('company.html', company=list)
+
 
     # 搜索电影
     def searchMovie(self, movieId):
