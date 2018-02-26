@@ -28,6 +28,7 @@ class Companys(tornado.web.RequestHandler):
         list = self.getCompanyList()
 
         self.render('company.html', company=list)
+        # self.render('company.html')
 
 
     # 获取公司列表
