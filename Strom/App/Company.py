@@ -29,6 +29,7 @@ class Company(tornado.web.RequestHandler):
 class CompanyEdit(tornado.web.RequestHandler):
 
     addEdList = []
+    count = 1
 
     #
     def get(self, *args, **kwargs):
@@ -50,7 +51,14 @@ class CompanyEdit(tornado.web.RequestHandler):
         if addId != None:
             movieList = self.searchMovie(addId)
             self.addEdList = self.addEdList + movieList
-            self.render('companyEdit.html', movieList=self.addEdList)
+
+            print("============= ADDDDDDDDDD", addId, "----", str(self.count))
+            self.count = self.count + 1
+
+            jsonData = json.dumps(self.addEdList, cls=new_alchemy_encoder(), check_circular=False)
+            self.write(jsonData)
+
+            # self.render('companyEdit.html', movieList=self.addEdList)
             return
 
         # 渲染页面
@@ -70,8 +78,6 @@ class CompanyEdit(tornado.web.RequestHandler):
 
             return movie
 
-
-
 # 数据库管理类
 class Session():
 
@@ -87,7 +93,7 @@ class Session():
 
         return session
 
-
+# 模型转json
 def new_alchemy_encoder():
     _visited_objs = []
 

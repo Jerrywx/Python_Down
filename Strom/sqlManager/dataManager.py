@@ -126,6 +126,21 @@ class VideoToCelebrity(Base):
     # 视频
     video_id = Column(Integer, ForeignKey('video.id'))
 
+
+# =============================================== 电影公司 与其他表关系
+
+# 电影与电影公司
+class MovieToCompany(Base):
+    __tablename__ = "movie_to_company"
+
+    # id
+    id = Column(Integer, primary_key=True)
+    # 电影人
+    company_id = Column(Integer, ForeignKey('company.id'))
+    # 电影类型
+    movie_id = Column(Integer, ForeignKey('movie.id'))
+
+
 # =============================================== 影集 与 类型
 # 影集 与 电影类型
 class MovieListToType(Base):
@@ -397,8 +412,48 @@ class MovieAlbum(Base):
     # 评分
     mark            = Column(Float)
 
-    movie_type = relationship("MovieType", secondary=MovieListToType.__table__, backref='list')
+    movie_type      = relationship("MovieType", secondary=MovieListToType.__table__, backref='list')
 
+# 电影公司
+class Company(Base):
+
+    # 表名
+    __tablename__   = "company"
+
+    # 设置ID 类型 主键
+    id = Column(Integer, primary_key=True)
+
+    # ========================================== 基本信息
+    # 公司名称
+    name            = Column(String(128))
+    name_en         = Column(String(128))
+
+    # 总部地址
+    address         = Column(String(128))
+
+    # 创建时间
+    create_time     = Column(String(128))
+
+    # 经营范围
+    deal_with       = Column(String(128))
+
+    # 公司性质
+    nature          = Column(String(128))
+
+    # 母公司
+    p_company       = Column(String(128))
+
+    # 子公司
+    s_company       = Column(String(128))
+
+    # 创立者
+    create_person   = Column(String(128))
+
+    # 简介
+    desc_info       = Column(String(2048))
+
+    # 作品
+    works           = relationship("Movie", secondary=MovieToCompany.__table__, backref="company")
 
 # 创建表
 Base.metadata.create_all(engine)

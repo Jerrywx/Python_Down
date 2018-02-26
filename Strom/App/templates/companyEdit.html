@@ -71,13 +71,35 @@
         <div class="works_add_list">
 
             <table border="1" class="movieList">
-                <tr>
-                    <th>名字</th>
-                    <th>原名</th>
-                    <th>评分</th>
-                    <th>豆瓣Id</th>
-                    <th width="50px">是否添加</th>
-                </tr>
+                <!--<tr>-->
+                    <!--<th>名字</th>-->
+                    <!--<th>原名</th>-->
+                    <!--<th>评分</th>-->
+                    <!--<th>豆瓣Id</th>-->
+                    <!--<th width="50px">是否添加</th>-->
+                <!--</tr>-->
+
+                {% for item in movieList %}
+                    <tr>
+                        <td><a href="moviedetial?movieid={{item.id}}">{{item.movie_name_cn}}</a></td>
+                        <td>{{item.movie_name_en}}</td>
+                        <td style="text-align:center">{{item.movie_douban_mark}}</td>
+                        <td style="text-align:center">{{item.movie_douban_id}}</td>
+                        <td style="text-align:center"><a href="companyEdit?addId={{item.id}}">添加</a></td>
+                    </tr>
+                {% end %}
+
+            </table>
+
+
+            <table border="1" class="movieList">
+                <!--<tr>-->
+                    <!--<th>名字</th>-->
+                    <!--<th>原名</th>-->
+                    <!--<th>评分</th>-->
+                    <!--<th>豆瓣Id</th>-->
+                    <!--<th width="50px">是否添加</th>-->
+                <!--</tr>-->
 
                 {% for item in movieList %}
                     <tr>
@@ -100,8 +122,8 @@
 
 <script>
 
+    <!-- 搜索电影 -->
     function test() {
-
 
         var xmlhttp;
         if (window.XMLHttpRequest)
@@ -116,13 +138,68 @@
         xmlhttp.onreadystatechange=function() {
             if (xmlhttp.readyState==4 && xmlhttp.status==200) {
 
+                // 解析 json
                 var jsonData = xmlhttp.responseText;
                 var list = JSON.parse(jsonData);
 
-                var obj = list[0]
+                // 获取 table 标签
+                var table_node = document.getElementsByClassName("movieList")[0];
 
+                var table_node2 = document.getElementsByClassName("movieList")[1];
+                table_node2.style.display = "none";
 
-                alert(obj.movie_name_cn)
+                // 删除之前内容
+//                var row_list = table_node.childNodes;
+//                for (ind=2;ind<row_list.length;ind++) {
+//                    var remove_nod = row_list[ind];
+//                    table_node.removeChild(remove_nod);
+//                }
+
+                while(table_node.hasChildNodes()) {
+                    table_node.removeChild(table_node.firstChild);
+                }
+
+                // 添加新内容
+                for (var i=0; i<list.length; i++) {
+                    var obj = list[i];
+
+                    var tr_node = document.createElement("tr");
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.innerHTML = obj.movie_name_cn;
+                    tr_node.appendChild(td_node);
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.innerHTML = obj.movie_name_en;
+                    tr_node.appendChild(td_node);
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.style.textAlign = "center";
+                    td_node.innerHTML = obj.movie_douban_mark;
+                    tr_node.appendChild(td_node);
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.style.textAlign = "center";
+                    td_node.innerHTML = obj.movie_douban_id;
+                    tr_node.appendChild(td_node);
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.style.textAlign = "center";
+                    tr_node.appendChild(td_node);
+
+                    var add_btn = document.createElement("a");
+                    add_btn.innerHTML = "添加";
+                    add_btn.onclick = test2;
+                    add_btn.style.tag = obj.id;
+                    td_node.appendChild(add_btn);
+
+                    table_node.appendChild(tr_node);
+                }
             }
         }
 
@@ -131,6 +208,97 @@
         var word = wordElem.value;
 
         var urlString = "/companyEdit?movieId=" + word;
+
+        xmlhttp.open("GET", urlString, true);
+        xmlhttp.send();
+    }
+
+
+    <!-- 添加电影 -->
+    function test2() {
+
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+
+                // 解析 json
+                var jsonData = xmlhttp.responseText;
+                var list = JSON.parse(jsonData);
+
+                // 获取 table 标签
+                var table_node = document.getElementsByClassName("movieList")[0];
+
+                var table_node2 = document.getElementsByClassName("movieList")[1];
+                table_node2.style.display = "table";
+
+                // 删除之前内容
+//                var row_list = table_node.childNodes;
+//                alert(row_list.length)
+//                for (ind=2;ind<row_list.length;ind++) {
+//                    var remove_nod = row_list[ind];
+//                    table_node.removeChild(remove_nod);
+//                }
+                while(table_node.hasChildNodes()) {
+                    table_node.removeChild(table_node.firstChild);
+                }
+
+                // 添加新内容
+                for (var i=0; i<list.length; i++) {
+                    var obj = list[i];
+
+                    var tr_node = document.createElement("tr");
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.innerHTML = obj.movie_name_cn;
+                    tr_node.appendChild(td_node);
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.innerHTML = obj.movie_name_en;
+                    tr_node.appendChild(td_node);
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.style.textAlign = "center";
+                    td_node.innerHTML = obj.movie_douban_mark;
+                    tr_node.appendChild(td_node);
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.style.textAlign = "center";
+                    td_node.innerHTML = obj.movie_douban_id;
+                    tr_node.appendChild(td_node);
+
+                    //
+                    var td_node = document.createElement("td");
+                    td_node.style.textAlign = "center";
+                    tr_node.appendChild(td_node);
+
+                    var add_btn = document.createElement("a");
+                    add_btn.innerHTML = "添加";
+                    add_btn.onclick = test2;
+                    td_node.appendChild(add_btn);
+
+                    table_node2.appendChild(tr_node);
+                }
+            }
+        }
+
+        // 获取搜索词
+        var wordElem = document.getElementsByClassName("searcg_word")[0];
+        var word = wordElem.value;
+
+        var urlString = "/companyEdit?addId=" + this.style.tag;
 
         xmlhttp.open("GET", urlString, true);
         xmlhttp.send();
