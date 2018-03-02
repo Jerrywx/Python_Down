@@ -40,8 +40,6 @@ class Companys(tornado.web.RequestHandler):
 
         return list
 
-
-
 # 编辑
 class CompanyEdit(tornado.web.RequestHandler):
 
@@ -50,6 +48,8 @@ class CompanyEdit(tornado.web.RequestHandler):
 
     #
     def get(self, *args, **kwargs):
+
+        session = Session.session()
 
         # 判断是否有搜索id
         movieId = self.get_argument("movieId", None)
@@ -78,8 +78,18 @@ class CompanyEdit(tornado.web.RequestHandler):
             # self.render('companyEdit.html', movieList=self.addEdList)
             return
 
-        # 渲染页面
-        self.render('companyEdit.html', movieList=[])
+        # 是否是编辑
+        comId = self.get_argument("companyId", None)
+
+        if comId == None:
+            company = Company()
+            self.render('companyEdit.html', company=company, movieList=[])
+        else:
+            company = session.query(Company).filter_by(id=comId).first()
+            self.render('companyEdit.html', company=company, movieList=[])
+
+            # 渲染页面
+            # self.render('companyEdit.html', movieList=[])
 
     # 提交表单
     def post(self, *args, **kwargs):
@@ -119,6 +129,22 @@ class CompanyEdit(tornado.web.RequestHandler):
             movie = session.query(Movie).filter(Movie.movie_name_cn.like(value)).all()
 
             return movie
+
+# 删除公司
+class CompanyDel(tornado.web.RequestHandler):
+    # get 方法
+    def get(self, *args, **kwargs):
+        companyId = self.get_argument("comId", None)
+
+        if companyId != None:
+            session = Session.session()
+            company = session.query(Company).filter_by(id=companyId).first()
+            session.delete(company)
+            session.commit()
+            self.write("true")
+        else:
+            self.write("false")
+
 
 # 数据库管理类
 class Session():

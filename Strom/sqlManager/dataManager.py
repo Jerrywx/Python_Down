@@ -420,6 +420,19 @@ class Company(Base):
     # 表名
     __tablename__   = "company"
 
+    def __init__(self):
+        self.name = ""
+        self.name_en = ""
+        self.address = ""
+        self.create_time = ""
+        self.deal_with = ""
+        self.nature = ""
+        self.p_company = ""
+
+        self.desc_info = ""
+        self.s_company = ""
+        self.create_person = ""
+
     # 设置ID 类型 主键
     id = Column(Integer, primary_key=True)
 

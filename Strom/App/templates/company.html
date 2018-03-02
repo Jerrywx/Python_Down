@@ -14,18 +14,61 @@
 
 <div class="info">
 
-    {% for com in company %}
+    <table border="1" class="movieList">
+        <tr>
+            <th width="50px">ID</th>
+            <th width="200px">名字</th>
+            <th>原名</th>
+            <th>地址</th>
+            <th>年份</th>
+            <th>删除</th>
+        </tr>
 
-        <div>{{com.name}}</div>
+        {% for com in company %}
+            <tr id="{{com.id}}">
+                <td>{{com.id}}</td>
+                <td><a href="companyEdit?companyId={{com.id}}">{{com.name}}</a></td>
+                <td style="text-align:center">{{com.name_en}}</td>
+                <td style="text-align:center">{{com.address}}</td>
+                <td style="text-align:center">{{com.create_time}}</td>
+                <td style="text-align:center">
+                    <!--<a href="#">删除</a>-->
+                    <button onclick="delCompany({{com.id}})">删除</button>
+                </td>
+            </tr>
+        {% end %}
 
-    {% end %}
-
+    </table>
 </div>
 
 <script>
 
-    function test() {
-        alert("哈哈")
+    function delCompany(id) {
+
+        var xmlhttp;
+        if (window.XMLHttpRequest)
+        {
+            //  IE7+, Firefox, Chrome, Opera, Safari 浏览器执行代码
+            xmlhttp=new XMLHttpRequest();
+        }
+        else {
+            // IE6, IE5 浏览器执行代码
+            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+        }
+        xmlhttp.onreadystatechange=function() {
+            if (xmlhttp.readyState==4 && xmlhttp.status==200) {
+
+                var tr = document.getElementById(id);
+                var table = document.getElementsByClassName("movieList")[0];
+                tr.parentNode.removeChild(tr);
+            }
+        }
+
+        var urlString = "/delCompany?comId=" + id;
+
+        xmlhttp.open("GET", urlString, true);
+        xmlhttp.send();
+
     }
 
 </script>
