@@ -59,6 +59,11 @@ class CompanyEdit(tornado.web.RequestHandler):
             # 搜索结果转 json
             jsonData = json.dumps(movieList, cls=new_alchemy_encoder(), check_circular=False)
 
+            print("-------------")
+            print("-------------")
+            print("-------------")
+            print("-------------")
+
             self.write(jsonData)
             # self.render('companyEdit.html', movieList=movieList)
             return
@@ -111,6 +116,8 @@ class CompanyEdit(tornado.web.RequestHandler):
         session.commit()
 
         list = session.query(Company).all()
+        print("==============")
+        print("==============")
 
         # 渲染页面
         self.render('company.html', company=list)

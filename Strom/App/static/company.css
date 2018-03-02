@@ -141,6 +141,8 @@
 }
 
 .search_btn {
+    display: block;
+    width: 30px;
     padding: 0px 10px;
     /*margin-left: 3px;*/
     /*background-color: #2b542c;*/
