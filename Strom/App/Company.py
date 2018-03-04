@@ -196,3 +196,21 @@ def new_alchemy_encoder():
             return json.JSONEncoder.default(self, obj)
 
     return AlchemyEncoder
+
+
+
+
+class Upload(tornado.web.RequestHandler):
+
+    def post(self, *args, **kwargs):
+        # img = self.get_argument("img", None)
+        file_metas = self.request.files.get('img', None)
+        print("====================")
+        print(file_metas[0]['filename'])
+
+        file = open("./img.jpg", "wb")
+        file.write(file_metas[0]['body'])
+        file.close()
+
+        self.write("asdasdas")
+

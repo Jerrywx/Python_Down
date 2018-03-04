@@ -1,51 +1,42 @@
 {% extends "base.html" %}
 
+{% block style %}
+<link rel="stylesheet" href="static/top250.css">
+{% end %}
+
+
 {% block body %}
 
 <!-- 影集 -->
 <h4>Top250</h4>
 
-<!--<form action="" method="post" enctype="multipart/form-data" name="upload_form">-->
 
-  <!--<label>选择图片文件</label>-->
+    <!--<form method="post" enctype="multipart/form-data" action="upload" name="upload_form">-->
+        <!--<input type="file" name="img" accept="image/jpeg,image/png,image/gif"/>-->
 
- <!--<input name="imgfile" type="file" accept="image/gif, image/jpeg"/>-->
+        <!--<input type="submit" value="提交图片">-->
+    <!--</form>-->
 
-  <!--<input name="upload" type="submit" value="上传" />-->
 
-<!--</form>-->
+<input type="file" id='file' onchange="c()" value="了">
 
-<form id="Form1" method="post" enctype="multipart/form-data">
-        <input id="file_upload" type="file" accept="image/jpeg,image/png,image/gif" />
-        <div class="image_container">
-            <img id="preview" style="height:130px;width:117px;border-width:0px;" />
-        </div>
-    </form>
+<img src="#" id='show' onerror="this.src='../static/image/header.png'">
 
-    <script type="text/javascript">
-        $(function () {
-            $("#file_upload").change(function () {
-                var $file = $(this);
-                var fileObj = $file[0];
-                var windowURL = window.URL || window.webkitURL;
-                var dataURL;
-                var $img = $("#preview");
+<script type="text/javascript">
+    function c () {
+        var r= new FileReader();
+        f=document.getElementById('file').files[0];
 
-                if (fileObj && fileObj.files && fileObj.files[0]) {
-                    dataURL = windowURL.createObjectURL(fileObj.files[0]);
-                    $img.attr('src', dataURL);
-                } else {
-                    dataURL = $file.val();
-                    var imgObj = document.getElementById("preview");
-                    // 两个坑:
-                    // 1、在设置filter属性时，元素必须已经存在在DOM树中，动态创建的Node，也需要在设置属性前加入到DOM中，先设置属性在加入，无效；
-                    // 2、src属性需要像下面的方式添加，上面的两种方式添加，无效；
-                    imgObj.style.filter = "progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale)";
-                    imgObj.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = dataURL;
+        var dd =document.getElementById('file');
 
-                }
-            });
-        });
-    </script>
+        r.readAsDataURL(f);
+        r.onload=function  (e) {
+            document.getElementById('show').src=this.result;
+
+            dd.body.style.backgroundImage="url(https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=3435028859,2779275103&fm=58)"
+        };
+    }
+</script>
+
 
 {% end %}

@@ -1,0 +1,19 @@
+
+
+#file {
+    width: 100px;
+    height: 100px;
+    background-color: red;
+    opacity:0.9;
+}
+
+#show {
+    width: 100px;
+    height: 100px;
+    background-color: green;
+    /*text-align:center;*/
+    /*style="vertical-align:middle;";*/
+    vertical-align:middle;
+    horiz-align: center;
+    font-size: 200px;
+}
