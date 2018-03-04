@@ -18,7 +18,13 @@
 <div class="add_info">
 
     <div class="header">
-        <img class="header_icon" src="../static/image/header.png" height="120">
+
+        <div class="header_icon">
+            <img src="#" class="dis_icon" id='show'>
+            <input class="sel_icon" type="file" name="img" onchange="c()" id='file' >
+        </div>
+
+        <!--<img class="header_icon" src="../static/image/header.png" height="120">-->
 
         <div class="header_info">
             <h1>公司名称:</h1>
@@ -40,8 +46,7 @@
                 <input value="{{company.create_person}}" name="person"> <br/>
 
         </div>
-        <!--公司名称 漫威漫画公司 外文名称 Marvel Comics 总部地点美国-纽约 成立时间 1939年-->
-        <!--经营范围 漫画出版 公司性质 漫画出版公司 母公司华特迪士尼公司 创立者马丁·古德曼-->
+
     </div>
 
     <div class="introduction">
@@ -62,7 +67,7 @@
             <div class="search_add">
 
                 <input type="text" placeholder="搜索内容" name="movieId" class="searcg_word">
-                <input type="text" value="搜索 s" class="search_btn" onclick="test()">
+                <input type="button" value="搜索 s" class="search_btn" onclick="test()">
                 <!--<form action="companyEdit" method="get" class="search_input">-->
                     <!--<input type="text" placeholder="搜索内容" name="movieId">-->
                     <!--<input type="submit" value="搜索" class="search_btn">-->
@@ -81,27 +86,10 @@
                     <!--<th width="50px">是否添加</th>-->
                 <!--</tr>-->
 
-                <!--{% for item in movieList %}-->
-                    <!--<tr>-->
-                        <!--<td><a href="moviedetial?movieid={{item.id}}">{{item.movie_name_cn}}</a></td>-->
-                        <!--<td>{{item.movie_name_en}}</td>-->
-                        <!--<td style="text-align:center">{{item.movie_douban_mark}}</td>-->
-                        <!--<td style="text-align:center">{{item.movie_douban_id}}</td>-->
-                        <!--<td style="text-align:center"><a href="companyEdit?addId={{item.id}}">添加</a></td>-->
-                    <!--</tr>-->
-                <!--{% end %}-->
-
             </table>
 
 
             <table border="1" class="movieList">
-                <!--<tr>-->
-                    <!--<th>名字</th>-->
-                    <!--<th>原名</th>-->
-                    <!--<th>评分</th>-->
-                    <!--<th>豆瓣Id</th>-->
-                    <!--<th width="50px">是否添加</th>-->
-                <!--</tr>-->
 
                 {% for item in movieList %}
                     <tr>
@@ -124,6 +112,19 @@
 </form>
 
 <script>
+
+
+    function c () {
+        var r= new FileReader();
+        f=document.getElementById('file').files[0];
+
+        var dd =document.getElementById('file');
+
+        r.readAsDataURL(f);
+        r.onload=function  (e) {
+            document.getElementById('show').src=this.result;
+        };
+    }
 
     <!-- 搜索电影 -->
     function test() {
@@ -213,10 +214,13 @@
         var wordElem = document.getElementsByClassName("searcg_word")[0];
         var word = wordElem.value;
 
-        var urlString = "/companyEdit?movieId=" + word;
+        if (word.length > 0) {
+            var urlString = "/companyEdit?movieId=" + word;
 
-        xmlhttp.open("GET", urlString, true);
-        xmlhttp.send();
+            xmlhttp.open("GET", urlString, true);
+            xmlhttp.send();
+        }
+
     }
 
 

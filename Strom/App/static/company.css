@@ -32,7 +32,7 @@
     width: 800px;
     height: 160px;
     border-radius:5px;
-    /*background-color: yellow;*/
+    background-color: yellow;
 }
 
 .introduction {
@@ -67,7 +67,7 @@
     width: 500px;
     height: 120px;
     background-color: white;
-    margin-left: 10px;
+    margin-left: 40px;
     margin-top: 20px;
 }
 
@@ -147,3 +147,31 @@
     /*margin-left: 3px;*/
     /*background-color: #2b542c;*/
 }
+
+
+.header_icon {
+    float: left;
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    /*margin-left: 20px;*/
+    /*margin-top: 20px;*/
+    position: relative;
+}
+
+.sel_icon {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: red;
+    left: 20px;
+    top: 20px;
+    opacity: 0;
+}
+
+.dis_icon {
+    width: 100%;
+    height: 100%;
+    background-color: green;
+}
+
